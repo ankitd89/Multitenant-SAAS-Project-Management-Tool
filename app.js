@@ -5,7 +5,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , request = require('request')
-  , cors = require('cors');
+  , cors = require('cors')
+  ,db = require('./db');
 
 var app = express();
 
@@ -21,6 +22,19 @@ app.use(app.router);
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+/*db.dmlQry('insert into registration set ?',registration, function(error,result){
+    if(error){
+        console.log("Error" + error);
+        res.writeHead(500, {'Content-Type': "application/json"});
+        res.end(JSON.stringify({response:error}));
+    }
+    else{
+         res.writeHead(200, {'Content-Type': "application/json"});
+         res.end(JSON.stringify({response:'Saved to MySQL'}));
+    }          
+});
+*/
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
