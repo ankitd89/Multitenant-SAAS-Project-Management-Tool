@@ -1,0 +1,11 @@
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# node-waf configuration
+
+build/Release
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+db.js

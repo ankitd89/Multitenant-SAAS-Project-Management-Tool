@@ -4,7 +4,7 @@ function getConnection(){
 	var connection = mysql.createConnection({
 		host     : 'localhost',
 		user     : 'root',
-		password : 'password-1',
+		password : 'qwerty',
 		database : 'cmpe281project'
 	});
 	return connection;
