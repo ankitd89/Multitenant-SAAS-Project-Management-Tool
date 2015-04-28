@@ -23,8 +23,6 @@ Alter table Users auto_increment = 1001;
 
 create table Data_Table (
     tenant_id int,
-   # foreign key (tenant_id)
-    #    references Tenants (tenant_id),
     user_id int,
     foreign key (user_id)
         references Users (user_id),
@@ -48,6 +46,8 @@ create table Meta_Data (
     extension_name varchar(10),
     extenstion_data_type varchar(20)
 );
+
+alter table meta_data modify extension_name varchar(20);
 
 Alter table Meta_Data auto_increment = 7001;
 
