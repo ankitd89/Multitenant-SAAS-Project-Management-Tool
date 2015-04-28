@@ -6,8 +6,7 @@ var express = require('express')
   , path = require('path')
   , request = require('request')
   , cors = require('cors')
-  
-
+  , db = require('./db');  
 var app = express();
 var KanbanAPIs= require('./routes/KanbanAPIs');
 
@@ -29,7 +28,22 @@ app.use(express.static(path.join(__dirname, 'public')));
  app.post('/createProject', KanbanAPIs.createProject);
  app.post('/createTask', KanbanAPIs.createTask);
  app.post('/editTask', KanbanAPIs.editTask);
- 
+
+  app.post('/adduser',  function(req,res){
+  var user = req.body;
+  db.dmlQry('insert into Users set ?',user, function(error,result){
+    if(error){
+        console.log("Error" + error);
+        res.writeHead(500, {'Content-Type': "application/json"});
+        res.end(JSON.stringify({response:error}));
+    }
+    else{
+         res.writeHead(200, {'Content-Type': "application/json"});
+         res.end(JSON.stringify({response:'Saved to MySQL'}));
+    }          
+  });
+});
+
 
 
 

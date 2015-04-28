@@ -63,21 +63,18 @@ this.editTask = function(req, res, next) {
  //post
 
  this.createTask = function(req, res, next) {
-    db.dmlQry('insert into registration set ?',registration, function(error,result){
+   var email_id= req.body.email_id;
+   console.log("hi");
+   db.dmlQry('select user_id from Users where email_id = ?',email_id, function(error,result){
     if(error){
         console.log("Error" + error);
         res.writeHead(500, {'Content-Type': "application/json"});
         res.end(JSON.stringify({response:error}));
     }
-    else{
-         res.writeHead(200, {'Content-Type': "application/json"});
-         res.end(JSON.stringify({response:'Saved to MySQL'}));
-    }  
+    console.log(email_id);
 
-    return res.end();
-   // return res.render('userProfile',{'firstName':user.firstName,'lastName': user.lastName,'EmailAddress': user._id,'WhatILike': user.whatilike,'Distance':user.Distance});
-        
-	});
+    });
+    res.end("Hello");	
 
  }
 
