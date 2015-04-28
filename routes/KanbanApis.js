@@ -75,14 +75,18 @@ this.createTask = function(req, res, next) {
     }
     user_id=result[0].user_id;
     tenant_id = result[0].tenant_id;
-     var Data_Table_Object={
+    var task_id= Math.floor(Math.random() * (100000 - 1) + 1);
+    console.log(task_id);
+    var Data_Table_Object={
     "tenant_id": tenant_id,
     "user_id":user_id,
     "project_name":req.body.project_name,
-    "task_id":123,
+    "task_id":task_id,
     "task_name":req.body.task_name,
     "start_date": req.body.start_date,
     "end_date":req.body.end_date}
+     var record_id;
+     
     db.dmlQry('insert into Data_Table set ?',Data_Table_Object, function(error,result){
     if(error){
         console.log("Error" + error);
@@ -92,7 +96,27 @@ this.createTask = function(req, res, next) {
     else{
          res.writeHead(200, {'Content-Type': "application/json"});
          res.end(JSON.stringify({response:'Saved to MySQL'}));
-    }          
+    }   
+    db.dmlQry('select record_id from Data_Table where task_id = ?',task_id, function(error,result){
+        if(error){
+            console.log("Error" + error);
+            res.writeHead(500, {'Content-Type': "application/json"});
+            res.end(JSON.stringify({response:error}));
+        }
+        console.log(result[0].record_id);
+        /*db.dmlQry('insert into Data_Table set ?',Data_Table_Object, function(error,result){
+            if(error){
+                console.log("Error" + error);
+                res.writeHead(500, {'Content-Type': "application/json"});
+                res.end(JSON.stringify({response:error}));
+            }
+            else{
+                 res.writeHead(200, {'Content-Type': "application/json"});
+                 res.end(JSON.stringify({response:'Saved to MySQL'}));
+            }
+        });*/
+    });
+    
   });
     });
        
