@@ -62,20 +62,40 @@ this.editTask = function(req, res, next) {
 
  //post
 
- this.createTask = function(req, res, next) {
+this.createTask = function(req, res, next) {
    var email_id= req.body.email_id;
-   console.log("hi");
-   db.dmlQry('select user_id from Users where email_id = ?',email_id, function(error,result){
+   var user_id;
+   console.log(email_id);
+  db.dmlQry('select user_id from Users where email_id = ?',email_id, function(error,result){
+    if(error){
+      console.log("kya kare");
+        console.log("Error" + error);
+        res.writeHead(500, {'Content-Type': "application/json"});
+        res.end(JSON.stringify({response:error}));
+        
+    }
+    user_id=result[0].user_id;
+     var Data_Table_Object={
+    "tenant_id": req.body.tenant_id,
+    "user_id":user_id,
+    "project_name":req.body.project_name,
+    "task_id":123,
+    "task_name":req.body.task_name,
+    "start_date": req.body.start_date,
+    "end_date":req.body.end_date}
+    db.dmlQry('insert into Data_Table set ?',Data_Table_Object, function(error,result){
     if(error){
         console.log("Error" + error);
         res.writeHead(500, {'Content-Type': "application/json"});
         res.end(JSON.stringify({response:error}));
     }
-    console.log(email_id);
-
+    else{
+         res.writeHead(200, {'Content-Type': "application/json"});
+         res.end(JSON.stringify({response:'Saved to MySQL'}));
+    }          
+  });
     });
-    res.end("Hello");	
-
+       
  }
 
   this.createProject = function(req, res) {

@@ -1,0 +1,15 @@
+//Users
+{
+    "email_id":"nishantnananana@gmail.com",
+    "password":"123456"
+}
+
+// Data Table
+{
+    "email_id":"nishant@gmail.com",
+    "tenant_id": 1,
+    "project_name":"abc",
+    "task_name":"abc",
+    "start_date": "2015-05-05",
+    "end_date":"2015-05-10"
+}

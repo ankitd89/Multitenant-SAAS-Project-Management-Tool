@@ -7,9 +7,8 @@ create table Users (
     password varchar(30)
 );
 
-Alter table Users auto_increment = 1001;
 
-insert into Users(email_id, password) values ("nishant@gmail.com","12345");
+Alter table Users auto_increment = 1001;
 
 create table Tenants (
     tenant_id int primary key,
@@ -28,7 +27,6 @@ create table Data_Table (
     user_id int,
     foreign key (user_id)
         references Users (user_id),
-    project_id varchar(5),
     project_name varchar(10),
     task_id int,
     task_name varchar(20),
@@ -39,6 +37,7 @@ create table Data_Table (
 
 Alter table Data_Table auto_increment = 5001;
 
+alter table Data_table modify column task_id int unique key;
 
 
 

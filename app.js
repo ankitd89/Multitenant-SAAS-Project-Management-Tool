@@ -6,7 +6,7 @@ var express = require('express')
   , path = require('path')
   , request = require('request')
   , cors = require('cors')
-  , db = require('./db');  
+  , db = require('./routes/db');  
 var app = express();
 var KanbanAPIs= require('./routes/KanbanAPIs');
 
