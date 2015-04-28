@@ -6,9 +6,10 @@ var express = require('express')
   , path = require('path')
   , request = require('request')
   , cors = require('cors')
-  ,db = require('./db');
+  
 
 var app = express();
+var KanbanAPIs= require('./routes/KanbanAPIs');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -21,6 +22,15 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+ app.get('/getTasks', KanbanAPIs.getTasks);
+ app.get('/getProjects', KanbanAPIs.getProjects);
+ app.post('/createProject', KanbanAPIs.createProject);
+ app.post('/createTask', KanbanAPIs.createTask);
+ app.post('/editTask', KanbanAPIs.editTask);
+ 
+
 
 
 /*db.dmlQry('insert into registration set ?',registration, function(error,result){
@@ -36,6 +46,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 });
 */
 // development only
+
+
+
+
+
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
