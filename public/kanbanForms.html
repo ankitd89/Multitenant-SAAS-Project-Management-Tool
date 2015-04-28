@@ -1,0 +1,461 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gantter-Forms</title>
+
+    <!--IE Compatibility modes-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--Mobile first-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="assets/lib/font-awesome/css/font-awesome.min.css">
+
+    <!-- Metis core stylesheet -->
+    <link rel="stylesheet" href="assets/css/main.min.css">
+
+    <!-- metisMenu stylesheet -->
+    <link rel="stylesheet" href="assets/lib/metismenu/metisMenu.min.css">
+    <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css">
+
+        <!-- metisMenu stylesheet -->
+    <link rel="stylesheet" href="assets/lib/metismenu/metisMenu.min.css">
+    <link rel="stylesheet" href="assets/lib/jquery.uniform/themes/default/css/uniform.default.css">
+    <link rel="stylesheet" href="assets/lib/inputlimiter/jquery.inputlimiter.css">
+    <link rel="stylesheet" href="assets/lib/chosen/chosen.min.css">
+    <link rel="stylesheet" href="assets/lib/colorpicker/css/colorpicker.css">
+    <link rel="stylesheet" href="assets/css/colorpicker_hack.css">
+    <link rel="stylesheet" href="assets/lib/tagsinput/jquery.tagsinput.css">
+    <link rel="stylesheet" href="assets/lib/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="assets/lib/datepicker/css/datepicker.css">
+    <link rel="stylesheet" href="assets/lib/timepicker/css/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="assets/lib/switch/css/bootstrap3/bootstrap-switch.min.css">
+    <link rel="stylesheet" href="assets/lib/jasny-bootstrap/css/jasny-bootstrap.min.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+    <!--[if lt IE 9]>
+      <script src="assets/lib/html5shiv/html5shiv.js"></script>
+        <script src="assets/lib/respond/respond.min.js"></script>
+        <![endif]-->
+
+    <!--For Development Only. Not required -->
+    <script>
+      less = {
+        env: "development",
+        relativeUrls: false,
+        rootpath: "../assets/"
+      };
+    </script>
+    <link rel="stylesheet" href="assets/css/style-switcher.css">
+    <link rel="stylesheet/less" type="text/css" href="assets/css/less/theme.html">
+    <script src="assets/lib/less/less-1.7.5.min.js"></script>
+
+    <!--Modernizr 2.8.2-->
+    <script src="assets/lib/modernizr/modernizr.min.js"></script>
+  </head>
+  <body class=" sidebar-left-mini menu-affix">
+    <div class="bg-dark dk" id="wrap">
+      <div id="top">
+
+        <!-- .navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <header class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a href="index.html" class="navbar-brand text-center">
+                     <h3 class="text-uppercase text-center text-muted test" style="margin-top:10px; margin-left:20px"> Multi-Tanent SaaS</h3><!--<img src="assets/img/logo.png" alt="">-->
+              </a>
+            </header>
+            <div class="topnav">
+
+
+              <div class="btn-group">
+                <a href="login.html" data-toggle="tooltip" data-original-title="Logout" data-placement="bottom" class="btn btn-metis-1 btn-sm">
+                  <i class="fa fa-power-off"></i>
+                </a>
+              </div>
+              <div class="btn-group">
+                <a data-placement="bottom" data-original-title="Show / Hide Left" data-toggle="tooltip" class="btn btn-primary btn-sm toggle-left" id="menu-toggle">
+                  <i class="fa fa-bars"></i>
+                </a>
+                <a data-placement="bottom" data-original-title="Show / Hide Right" data-toggle="tooltip" class="btn btn-default btn-sm toggle-right"> <span class="glyphicon glyphicon-comment"></span>  </a>
+              </div>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+              <!-- .nav -->
+              <!--<ul class="nav navbar-nav">
+                <li> <a href="dashboard.html">Dashboard</a>  </li>
+                <li> <a href="table.html">Tables</a>  </li>
+                <li> <a href="file.html">File Manager</a>  </li>
+                <li class='dropdown '>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Form Elements
+                    <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li> <a href="form-general.html">General</a>  </li>
+                    <li> <a href="form-validation.html">Validation</a>  </li>
+                    <li> <a href="form-wysiwyg.html">WYSIWYG</a>  </li>
+                    <li> <a href="form-wizard.html">Wizard &amp; File Upload</a>  </li>
+                  </ul>
+                </li>
+              </ul><!-- /.nav -->
+            </div>
+          </div><!-- /.container-fluid -->
+        </nav><!-- /.navbar -->
+        <header class="head">
+
+          <div class="main-bar">
+            <h3>
+              <i class="fa fa-clipboard" style="margin-left:5px;"></i>&nbsp; Kanban - Welcome user </h3>
+          </div><!-- /.main-bar -->
+        </header><!-- /.head -->
+      </div><!-- /#top -->
+      <div id="left">
+        <div class="media user-media bg-dark dker">
+          <div class="user-media-toggleHover">
+            <span class="fa fa-user"></span>
+          </div>
+          <div class="user-wrapper bg-dark">
+            <a class="user-link" href="#">
+              <img class="media-object img-thumbnail user-img" alt="User Picture" src="assets/img/user.gif">
+              <span class="label label-danger user-label">16</span>
+            </a>
+            <div class="media-body">
+              <h5 class="media-heading">Archie</h5>
+              <ul class="list-unstyled user-info">
+                <li> <a href="#">Administrator</a>  </li>
+                <li>Last Access :
+                  <br>
+                  <small>
+                    <i class="fa fa-calendar"></i>&nbsp;16 Mar 16:32</small>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- #menu -->
+        <ul id="menu" class="bg-blue dker">
+          <li class="nav-header">Menu</li>
+          <li class="nav-divider"></li>
+          <li class="">
+            <a href="dashboard.html">
+              <i class="fa fa-dashboard"></i><span class="link-title">&nbsp;Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="typography.html">
+              <i class="fa fa-font"></i>
+              <span class="link-title">
+            Typography
+          </span>
+            </a>
+          </li>
+          <li>
+            <a href="maps.html">
+              <i class="fa fa-map-marker"></i><span class="link-title">
+            Maps
+          </span>
+            </a>
+          </li>
+          <li>
+            <a href="chart.html">
+              <i class="fa fa fa-bar-chart-o"></i>
+              <span class="link-title">
+            Charts
+          </span>
+            </a>
+          </li>
+          <li>
+            <a href="calendar.html">
+              <i class="fa fa-calendar"></i>
+              <span class="link-title">
+            Calendar
+          </span>
+            </a>
+          </li>
+
+
+
+          <li class="nav-divider"></li>
+
+         <li>
+
+            <!-- Bu etiketi, +1 düğmesi adlı widget'ın oluşturulmasını istediğiniz yere ekleyin. -->
+            <div class="g-plusone" data-annotation="inline" data-width="220"></div>
+
+            <!-- Bu etiketi son +1 düğmesi etiketinin arkasına ekleyin. -->
+            <script type="text/javascript">
+              window.___gcfg = {
+                lang: 'tr'
+              };
+              (function() {
+                var po = document.createElement('script');
+                po.type = 'text/javascript';
+                po.async = true;
+                po.src = '../../apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(po, s);
+              })();
+            </script>
+          </li>
+          <style>
+            .metis-reklam {
+              width: 100%;
+              display: block;
+            }
+            @media(min-width: 978px) {
+              .metis-reklam {
+                width: 250px;
+                height: 500px;
+                margin-top: 20px;
+              }
+            }
+            .sidebar-left-mini .metis-reklam {
+              display: none !important;
+            }
+          </style>
+          <script async src="../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+          <!-- metis reklam -->
+          <ins class="adsbygoogle metis-reklam" style="display:inline-block" data-ad-client="ca-pub-5671633872085649" data-ad-slot="7860560198"></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </ul><!-- /#menu -->
+      </div><!-- /#left -->
+      <div id="content">
+        <div class="outer">
+          <div class="inner bg-light lter">
+            <h2>New Project</h2>
+	<!-- add dynamic project below-->
+            <div id="displayProjects" class="row">
+
+
+
+            </div>
+            <!-- create forms-->
+            <div class="row">
+
+              <!-- .col-lg-6 -->
+              <div class="col-lg-12">
+
+                <!-- .box -->
+                <div class="box">
+                  <header>
+                    <div class="icons">
+                      <i class="fa fa-edit"></i>
+                    </div>
+                    <h5>Kanban Form</h5>
+
+                    <!-- .toolbar -->
+                    <div class="toolbar">
+                      <nav style="padding: 8px;">
+                        <a href="javascript:;" class="btn btn-default btn-xs collapse-box">
+                          <i class="fa fa-minus"></i>
+                        </a>
+                        <a href="javascript:;" class="btn btn-default btn-xs full-box">
+                          <i class="fa fa-expand"></i>
+                        </a>
+                        <a href="javascript:;" class="btn btn-danger btn-xs close-box">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </nav>
+                    </div><!-- /.toolbar -->
+                  </header>
+
+                  <!-- .BODY -->
+                  <div class="body" id="colorPickerBlock">
+                    <form  id="newProject" class="form-horizontal" action="JavaScript:newProjectSubmit();">
+                      <div class="form-group">
+                        <label for="cp1" class="control-label col-lg-4">Project Name</label>
+                        <div class="col-lg-4">
+                          <input type="text" name="projectName" id="projectName" placeholder="Project Name" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp2" class="control-label col-lg-4">Task Name</label>
+                        <div class="col-lg-4">
+				 <input type="text" name="taskName" id="taskName" placeholder="Task Name" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp3" class="control-label col-lg-4">Start Date</label>
+                        <div class="col-lg-4">
+                          <div class="input-group input-append date" id="dp1" data-date="28-04-2015" data-date-format="dd-mm-yyyy">
+                            <input class="form-control" type="text" value="28-04-2015" readonly>
+                            <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+                          </div><!-- /input-group -->
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp3" class="control-label col-lg-4">Finish Date</label>
+                        <div class="col-lg-4">
+                          <div class="input-group input-append date" id="dp2" data-date="28-04-2015" data-date-format="dd-mm-yyyy">
+                            <input class="form-control" type="text" value="28-04-2015" readonly>
+                            <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+                          </div><!-- /input-group -->
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label for="autosize" class="control-label col-lg-4">Description</label>
+                        <div class="col-lg-4">
+                          <textarea name="description" id="autosize" placeholder="Enter Project Description" class="form-control"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp2" class="control-label col-lg-4">Task Type</label>
+                        <div class="col-lg-4">
+				 <name="task_type" id="task_type" class="form-control">
+         <select>
+  <option value="None">None</option>
+  <option value="saab">Bug</option>
+  <option value="opel">Support Request</option>
+  <option value="audi">Feature Request</option>
+</select>
+                        </div>
+</div>
+                      <div class="form-group">
+                        <label for="cp2" class="control-label col-lg-4">Assignee</label>
+                        <div class="col-lg-4">
+				 <input type="text" name="assignee" id="assignee" placeholder="Assignee" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp2" class="control-label col-lg-4">Status</label>
+                        <div class="col-lg-4">
+				 <input type="text" name="status" id="status" placeholder="Status" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp2" class="control-label col-lg-4">Priority</label>
+                        <div class="col-lg-4">
+         <name="task_type" id="task_type" class="form-control">
+         <select>
+  <option value="None">Average</option>
+  <option value="saab">High</option>
+</select>
+                        </div>
+                      </div>
+                      <div class="form-group" align="center">
+                       <button class="btn btn-group-sm btn-primary btn-block" style="width:20% !important;"  type="submit">Submit</button>
+                       </div>
+
+                    </form>
+                  </div><!-- /.BODY -->
+                </div><!-- /.box -->
+              </div><!-- /.col-lg-12 -->
+            </div>
+          </div><!-- /.inner -->
+        </div><!-- /.outer -->
+      </div><!-- /#content -->
+
+    </div><!-- /#wrap -->
+    <footer class="Footer bg-dark dker">
+      <p>2015 &copy; CMPE 281 Team #4</p>
+    </footer><!-- /#footer -->
+
+    <!--jQuery 2.1.1 -->
+    <script src="assets/lib/jquery/jquery.min.js"></script>
+    <script src="../../cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
+
+    <!--Bootstrap -->
+    <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- MetisMenu -->
+    <script src="assets/lib/metismenu/metisMenu.min.js"></script>
+
+    <!-- Screenfull -->
+    <script src="assets/lib/screenfull/screenfull.js"></script>
+
+    <!-- Metis core scripts -->
+    <script src="assets/js/core.min.js"></script>
+
+ <script src="assets/lib/metismenu/metisMenu.min.js"></script>
+
+    <!-- Screenfull -->
+    <script src="assets/lib/screenfull/screenfull.js"></script>
+    <script src="assets/lib/jquery.uniform/jquery.uniform.min.js"></script>
+    <script src="assets/lib/inputlimiter/jquery.inputlimiter.js"></script>
+    <script src="assets/lib/chosen/chosen.jquery.min.js"></script>
+    <script src="assets/lib/colorpicker/js/bootstrap-colorpicker.js"></script>
+    <script src="assets/lib/tagsinput/jquery.tagsinput.js"></script>
+    <script src="assets/lib/validVal/js/jquery.validVal.min.js"></script>
+    <script src="assets/lib/moment/moment.min.js"></script>
+    <script src="assets/lib/daterangepicker/daterangepicker.js"></script>
+    <script src="assets/lib/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="assets/lib/timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="assets/lib/switch/js/bootstrap-switch.min.js"></script>
+    <script src="assets/lib/autosize/jquery.autosize.min.js"></script>
+    <script src="assets/lib/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+
+
+    <!-- Metis demo scripts -->
+    <script src="assets/js/app.min.js"></script>
+    <script src="assets/js/style-switcher.min.js"></script>
+    <script type="text/javascript">
+
+    $( document ).ready(function() {
+		$("#menu").removeClass("affix");
+		 Metis.formGeneral();
+	/*for(i=0;i<5;i++)
+	{
+		var data='<div class="col-lg-4">'+
+                	'<div class="box">'+
+                  	'<header>'+
+                    	'<h5>Project '+i+'</h5>'+
+                    	'<div class="toolbar">'+
+                      '<button class="btn btn-xs btn-primary" onclick="viewproject('+i+');">View</button>'+
+                    	'</div>'+
+                  	'</header>'+
+                  	'<div class="body">'+
+                    	'<pre class="prettyprint linenums">This project is about some thing about project '+i+'</pre>'+
+                  	'</div>'+
+                	'</div>'+
+              	'</div>'
+		$("#displayProjects").append(data);
+	}*/
+});
+function newProjectSubmit(){
+var data=$("#newProject").serializeArray();
+ var o = {};
+  // var a = this.serializeArray();
+   $.each(data, function() {
+       if (o[this.name] !== undefined) {
+           if (!o[this.name].push) {
+               o[this.name] = [o[this.name]];
+           }
+           o[this.name].push(this.value || '');
+       } else {
+           o[this.name] = this.value || '';
+       }
+   });
+   //return o;
+       alert(JSON.stringify(o));
+	}
+function viewproject(id){
+	alert("you clicked on project="+id);
+	}
+    </script>
+  </body>
+
+</html>
