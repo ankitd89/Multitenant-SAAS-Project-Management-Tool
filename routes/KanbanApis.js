@@ -65,18 +65,18 @@ this.editTask = function(req, res, next) {
 this.createTask = function(req, res, next) {
    var email_id= req.body.email_id;
    var user_id;
+   var tenant_id;
    console.log(email_id);
-  db.dmlQry('select user_id from Users where email_id = ?',email_id, function(error,result){
+  db.dmlQry('select user_id, tenant_id from Users where email_id = ?',email_id, function(error,result){
     if(error){
-      console.log("kya kare");
         console.log("Error" + error);
         res.writeHead(500, {'Content-Type': "application/json"});
         res.end(JSON.stringify({response:error}));
-        
     }
     user_id=result[0].user_id;
+    tenant_id = result[0].tenant_id;
      var Data_Table_Object={
-    "tenant_id": req.body.tenant_id,
+    "tenant_id": tenant_id,
     "user_id":user_id,
     "project_name":req.body.project_name,
     "task_id":123,

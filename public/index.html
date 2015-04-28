@@ -1,83 +1,142 @@
-
-<!-- 
-Author URI: http://webthemez.com/ 
--->
-<!doctype html>
-<!--[if IE 7 ]>
-<html lang="en-gb" class="isie ie7 oldie no-js">
-    <![endif]-->
-    <!--[if IE 8 ]>
-    <html lang="en-gb" class="isie ie8 oldie no-js">
-        <![endif]-->
-        <!--[if IE 9 ]>
-        <html lang="en-gb" class="isie ie9 no-js">
-            <![endif]-->
-            <!--[if (gt IE 9)|!(IE)]>
-            <!-->
-<html lang="en-gb" class="no-js">
-<!--
-<![endif]-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<!--[if lt IE 9]>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<![endif]-->
-<title>Coming Soon</title>
-<meta name="description" content="">
-<meta name="author" content="WebThemez">
-</head>
-<body>
-	<!--/.header-->
-	<section id="home">
-		<div class="banner-container">
-			<div class="container">
-				<div class="row">
-					<div class="logo">
-						<!--<img src="images/logo.png" alr='logo'/>-->
-					</div>
-				</div>
-				<div class="heading text-center">
-					<h2>We are coming soon!!!</h2>
-					<strong>Stay tuned for something amazing</strong>
-				</div>
-				<div class="countdown styled"></div>
-			</div>
-		</section>
-		<footer>
-			<div class="container">
-				<div class="social text-center">
-					<a href="#">
-						<i class="fa fa-twitter"></i>
-					</a>
-					<a href="#">
-						<i class="fa fa-facebook"></i>
-					</a>
-					<a href="#">
-						<i class="fa fa-dribbble"></i>
-					</a>
-					<a href="#">
-						<i class="fa fa-flickr"></i>
-					</a>
-					<a href="#">
-						<i class="fa fa-github"></i>
-					</a>
-				</div>
-				<div class="clear"></div>
-				<!--CLEAR FLOATS-->
-			</div>
-		</footer>
-		<!--/.page-section-->
-		<section class="copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-12 text-center"> Copyright 2015 | All Rights Reserved - Template by Team 4
-						
-					</div>
-				</div>
-				<!-- / .row -->
-			</div>
-		</section>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <meta name="msapplication-TileColor" content="#5bc0de" />
+    <meta name="msapplication-TileImage" content="assets/img/metis-tile.png" />
 
-	</body>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="assets/lib/font-awesome/css/font-awesome.min.css">
+
+    <!-- Metis core stylesheet -->
+    <link rel="stylesheet" href="assets/css/main.min.css">
+    <link rel="stylesheet" href="assets/lib/animate.css/animate.min.css">
+  </head>
+  <body class="login">
+    <div class="form-signin">
+      <div class="text-center">
+     <h2 class="text-muted text-center"> Multi-Tanent SaaS</h2>
+        <!--<img src="assets/img/logo.png" alt="Metis Logo">-->
+      </div>
+      <hr>
+      <div class="tab-content">
+        <div id="login" class="tab-pane active">
+          <form id="form-login" action="JavaScript:login();">
+            <p class="text-muted text-center">
+              Enter your username and password
+            </p>
+            <input id="username" name="email_id" type="text" placeholder="mail@domain.com" class="form-control ">
+            <input id="password" name="password" type="password" placeholder="Password" class="form-control ">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox">Remember Me
+              </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          </form>
+        </div>
+        <div id="forgot" class="tab-pane">
+          <form action="http://demo.onokumus.com/metis/index.html">
+            <p class="text-muted text-center">Enter your valid e-mail</p>
+            <input type="email" placeholder="mail@domain.com" class="form-control">
+            <br>
+            <button class="btn btn-lg btn-danger btn-block" type="submit">Recover Password</button>
+          </form>
+        </div>
+        <div id="signup" class="tab-pane">
+          <form id="form-signup" action="JavaScript:Signup();">
+            <p class="text-muted text-left">Enter Your Email</p>
+            <input name="email_id" type="email" placeholder="mail@domain.com" class="form-control">
+            <p class="text-muted text-left">Password</p>
+            <input name="password" type="password" placeholder="password" class="form-control">
+            <input type="password" placeholder="re-password" class="form-control">
+			<p class="text-muted text-left">Select Tenent Type</p>
+            <select name="tenant_id" class="form-control">
+  <option value="1">Gantter</option>
+  <option value="2">Kanban</option>
+  <option value="3">Easy Backlog</option>
+
+</select>
+<br/>
+            <button class="btn btn-lg btn-success btn-block " type="submit">Register</button>
+          </form>
+        </div>
+      </div>
+      <hr>
+      <div class="text-center">
+        <ul class="list-inline">
+          <li> <a class="text-muted" href="#login" data-toggle="tab">Login</a>  </li>
+          <!--<li> <a class="text-muted" href="#forgot" data-toggle="tab">Forgot Password</a>  </li>-->
+          <li> <a class="text-muted" href="#signup" data-toggle="tab">Signup</a>  </li>
+        </ul>
+      </div>
+    </div>
+    <script src="assets/lib/jquery/jquery.min.js"></script>
+    <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      (function($) {
+        $(document).ready(function() {
+          $('.list-inline li > a').click(function() {
+            var activeForm = $(this).attr('href') + ' > form';
+            //console.log(activeForm);
+            $(activeForm).addClass('animated fadeIn');
+            //set timer to 1 seconds, after that, unload the animate animation
+            setTimeout(function() {
+              $(activeForm).removeClass('animated fadeIn');
+            }, 1000);
+          });
+        });
+      })(jQuery);
+      function login(){
+        var datasent=$("#form-login").serializeArray();
+        var o={};
+        $.each(datasent,function(){
+          if (o[this.name] !== undefined) {
+              if (!o[this.name].push) {
+                  o[this.name] = [o[this.name]];
+              }
+              o[this.name].push(this.value || '');
+          } else {
+              o[this.name] = this.value || '';
+          }
+        });
+        alert(JSON.stringify(o));
+      }
+      function Signup(){
+       var datassent=$("#form-signup").serializeArray();
+       var o = {};
+  // var a = this.serializeArray();
+   $.each(datassent, function() {
+       if (o[this.name] !== undefined) {
+           if (!o[this.name].push) {
+               o[this.name] = [o[this.name]];
+           }
+           o[this.name].push(this.value || '');
+       } else {
+           o[this.name] = this.value || '';
+       }
+   });
+       
+       $.ajax({
+    	    type: "POST",
+    	    url: "/adduser",
+    	    dataType: 'json',
+    	    data : o,
+    	    async: false,
+    	    crossDomain : true,
+    	    success: function(data){
+			console.log("User added successfully");
+    	    },
+    	     error: function(response,text,err){
+    	    	 alert(err);
+    	 	 }
+    	   });
+       
+      }
+    </script>
+  </body>
 </html>

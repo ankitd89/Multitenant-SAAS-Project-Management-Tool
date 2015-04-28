@@ -30,7 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
  app.post('/editTask', KanbanAPIs.editTask);
 
   app.post('/adduser',  function(req,res){
-  var user = req.body;
+  var user = req.body;  
+  console.log(user);
   db.dmlQry('insert into Users set ?',user, function(error,result){
     if(error){
         console.log("Error" + error);
