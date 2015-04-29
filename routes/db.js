@@ -2,11 +2,11 @@ var mysql = require('mysql');
 
 function getConnection(){
 	var connection = mysql.createConnection({
-		host     : '$OPENSHIFT_MYSQL_DB_HOST',
-		port:'$OPENSHIFT_MYSQL_DB_PORT',
+		host     : '127.4.24.2',
+		port	 : '3306',
 		user     : 'adminpqFpc4j',
 		password : 'fTG1YuwkjF58',
-		database : 'multitenant'
+		database : 'multitenantsaas'
 	});
 	return connection;
 }
