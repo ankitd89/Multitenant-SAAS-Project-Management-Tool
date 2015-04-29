@@ -1,4 +1,4 @@
-#!/bin/env node
+//#!/bin/env node
 //  OpenShift sample Node application
 var express = require('express')
   , routes = require('./routes')
@@ -127,6 +127,39 @@ var SampleApp = function() {
             }          
           });
         });
+         
+         self.app.post('/getuser',  function(req,res){
+             var email_id = req.body.email_id;
+             console.log(user);
+             db.dmlQry('select * from Users where email_id = ?',email_id, function(error,result){
+        	    if(error){
+        	        console.log("Error" + error);
+        	        res.writeHead(500, {'Content-Type': "application/json"});
+        	        res.end(JSON.stringify({response:error}));
+        	    }
+               else{
+            	   	var user_id=result[0].user_id;
+           	    	var tenant_id = result[0].tenant_id;
+           	    	var password = result[0].password;
+           	    	if(req.body.password == password){
+           	    		//send success message
+           	    		var replyJson = {
+           	    				user_id : user_id,
+           	    				email_id : email_id,
+           	    				tenant_id : tenant_id,
+           	    				password : password
+           	    		};
+           	    		res.writeHead(200, {'Content-Type': "application/json"});
+                        res.end(JSON.stringify(replyJson));
+           	    	}
+           	    	else{
+           	    		//send error
+           	    		res.writeHead(403, {'Content-Type': "application/json"});
+                        res.end(JSON.stringify({response:'Invalid User'}));
+           	    	}  
+               }          
+             });
+           });
 
         
         

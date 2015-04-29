@@ -104,7 +104,22 @@
               o[this.name] = this.value || '';
           }
         });
-        alert(JSON.stringify(o));
+        $.ajax({
+    	    type: "POST",
+    	    url: "/getuser",
+    	    dataType: 'json',
+    	    data : o,
+    	    async: false,
+    	    crossDomain : true,
+    	    success: function(data){
+			console.log("User logged in successfully");
+			window.open("/dashboard.html", "_self");
+    	    },
+    	     error: function(response,text,err){
+    	    	 alert(err);
+    	 	 }
+    	   });
+       
       }
       function Signup(){
        var datassent=$("#form-signup").serializeArray();
