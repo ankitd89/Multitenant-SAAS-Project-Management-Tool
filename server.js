@@ -112,6 +112,7 @@ var SampleApp = function() {
          self.app.post('/editTask', KanbanAPIs.editTask);
         
          self.app.post('/adduser',  function(req,res){
+             
           var user = req.body;  
           console.log(user);
           db.dmlQry('insert into Users set ?',user, function(error,result){
