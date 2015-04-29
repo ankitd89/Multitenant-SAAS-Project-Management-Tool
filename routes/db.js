@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+var mysql = require('mygitsql');
 
 function getConnection(){
 	var connection = mysql.createConnection({
@@ -6,7 +6,7 @@ function getConnection(){
 		port	 : '3306',
 		user     : 'adminpqFpc4j',
 		password : 'fTG1YuwkjF58',
-		database : 'multitenantsaas'
+		database : 'MultiTenantSaaS'
 	});
 	return connection;
 }
