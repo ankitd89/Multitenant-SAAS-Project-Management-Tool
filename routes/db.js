@@ -1,4 +1,4 @@
-var mysql = require('mygitsql');
+var mysql = require('mysql');
 
 function getConnection(){
 	var connection = mysql.createConnection({
