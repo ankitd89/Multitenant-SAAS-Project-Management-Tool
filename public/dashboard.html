@@ -22,7 +22,17 @@
 
     <!-- metisMenu stylesheet -->
     <link rel="stylesheet" href="assets/lib/metismenu/metisMenu.min.css">
-    <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css">
+    <link rel="stylesheet" href="assets/lib/jquery.uniform/themes/default/css/uniform.default.css">
+    <link rel="stylesheet" href="assets/lib/inputlimiter/jquery.inputlimiter.css">
+    <link rel="stylesheet" href="assets/lib/chosen/chosen.min.css">
+    <link rel="stylesheet" href="assets/lib/colorpicker/css/colorpicker.css">
+    <link rel="stylesheet" href="assets/css/colorpicker_hack.css">
+    <link rel="stylesheet" href="assets/lib/tagsinput/jquery.tagsinput.css">
+    <link rel="stylesheet" href="assets/lib/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="assets/lib/datepicker/css/datepicker.css">
+    <link rel="stylesheet" href="assets/lib/timepicker/css/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="assets/lib/switch/css/bootstrap3/bootstrap-switch.min.css">
+    <link rel="stylesheet" href="assets/lib/jasny-bootstrap/css/jasny-bootstrap.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -33,14 +43,6 @@
         <script src="assets/lib/respond/respond.min.js"></script>
         <![endif]-->
 
-    <!--For Development Only. Not required -->
-    <script>
-      less = {
-        env: "development",
-        relativeUrls: false,
-        rootpath: "../assets/"
-      };
-    </script>
     <link rel="stylesheet" href="assets/css/style-switcher.css">
     <link rel="stylesheet/less" type="text/css" href="assets/css/less/theme.html">
     <script src="assets/lib/less/less-1.7.5.min.js"></script>
@@ -117,9 +119,10 @@
       <div id="left">
         <div class="media user-media bg-dark dker">
           <div class="user-media-toggleHover">
-            <span class="fa fa-user"></span> 
+           <span type="button" class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#myModal"></span>
+  
           </div>
-          <div class="user-wrapper bg-dark">
+         <!-- <div class="user-wrapper bg-dark">
             <a class="user-link" href="#">
               <img class="media-object img-thumbnail user-img" alt="User Picture" src="assets/img/user.gif">
               <span class="label label-danger user-label">16</span> 
@@ -135,7 +138,7 @@
                 </li>
               </ul>
             </div>
-          </div>
+          </div>-->
         </div>
 
         <!-- #menu -->
@@ -247,39 +250,112 @@
       <p>2015 &copy; CMPE 281 Team #4</p>
     </footer><!-- /#footer -->
 
-    <!-- #helpModal -->
-    <div id="helpModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Modal title</h4>
-          </div>
-          <div class="modal-body">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal --><!-- /#helpModal -->
-
+    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        
+        <div class="body" id="colorPickerBlock">
+            <form  id="newProject" class="form-horizontal" action="JavaScript:newProjectSubmit();">
+              <div class="form-group">
+                <label for="cp1" class="control-label col-lg-4">Project Name</label>
+                <div class="col-lg-4">
+                  <input type="text" name="projectName" id="projectName" placeholder="Project Name" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cp2" class="control-label col-lg-4">Task Name</label>
+                <div class="col-lg-4">
+                  <input type="text" name="taskName" id="taskName" placeholder="Task Name" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cp3" class="control-label col-lg-4">Start Date</label>
+                <div class="col-lg-4">
+                  <div class="input-group input-append date" id="dp1" data-date="28-04-2015" data-date-format="dd-mm-yyyy">
+                    <input class="form-control" type="text" value="28-04-2015" >
+                    <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span> 
+                  </div><!-- /input-group -->
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cp3" class="control-label col-lg-4">Finish Date</label>
+                <div class="col-lg-4">
+                  <div class="input-group input-append date" id="dp2" data-date="28-04-2015" data-date-format="dd-mm-yyyy">
+                    <input class="form-control" type="text" value="28-04-2015" >
+                    <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span> 
+                  </div><!-- /input-group -->
+                </div>
+              </div>
+               <div class="form-group">
+                <label for="autosize" class="control-label col-lg-4">Description</label>
+                <div class="col-lg-4">
+                  <textarea name="description" id="autosize" placeholder="Enter Project Description" class="form-control"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cp2" class="control-label col-lg-4">Cost</label>
+                <div class="col-lg-4">
+                  <input type="text" name="cost" id="cost" placeholder="Cost" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cp2" class="control-label col-lg-4">Risk</label>
+                <div class="col-lg-4">
+                  <input type="text" name="risk" id="risk" placeholder="Risk" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cp2" class="control-label col-lg-4">Resourse</label>
+                <div class="col-lg-4">
+                  <input type="text" name="resourse" id="resourse" placeholder="Resourse" class="form-control">
+                </div>
+              </div>
+              <div class="form-group" align="center">
+                 <button class="btn btn-group-sm btn-primary btn-block" style="width:20% !important;"  type="submit">Submit</button>
+               </div>
+            </form>
+            
+        </div><!-- /.BODY -->
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+      
+    </div><!--Modal dialog div end -->
+  </div><!--My Modal div end -->
     <!--jQuery 2.1.1 -->
     <script src="assets/lib/jquery/jquery.min.js"></script>
-    <script src="../../cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
+
 
     <!--Bootstrap -->
     <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
-
     <!-- MetisMenu -->
     <script src="assets/lib/metismenu/metisMenu.min.js"></script>
 
     <!-- Screenfull -->
     <script src="assets/lib/screenfull/screenfull.js"></script>
+    <script src="assets/lib/jquery.uniform/jquery.uniform.min.js"></script>
+    <script src="assets/lib/inputlimiter/jquery.inputlimiter.js"></script>
+    <script src="assets/lib/chosen/chosen.jquery.min.js"></script>
+    <script src="assets/lib/colorpicker/js/bootstrap-colorpicker.js"></script>
+    <script src="assets/lib/tagsinput/jquery.tagsinput.js"></script>
+    <script src="assets/lib/validVal/js/jquery.validVal.min.js"></script>
+    <script src="assets/lib/moment/moment.min.js"></script>
+    <script src="assets/lib/daterangepicker/daterangepicker.js"></script>
+    <script src="assets/lib/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="assets/lib/timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="assets/lib/switch/js/bootstrap-switch.min.js"></script>
+    <script src="assets/lib/autosize/jquery.autosize.min.js"></script>
+    <script src="assets/lib/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+
 
     <!-- Metis core scripts -->
     <script src="assets/js/core.min.js"></script>
@@ -287,31 +363,7 @@
     <!-- Metis demo scripts -->
     <script src="assets/js/app.min.js"></script>
     <script src="assets/js/style-switcher.min.js"></script>
-    <script type="text/javascript">
-	
-    $( document ).ready(function() {
-	for(i=0;i<5;i++)
-	{
-		var data='<div class="col-lg-4">'+
-                	'<div class="box">'+
-                  	'<header>'+
-                    	'<h5>Project '+i+'</h5>'+
-                    	'<div class="toolbar">'+
-                      '<button class="btn btn-xs btn-primary" onclick="viewproject('+i+');">View</button>'+
-                    	'</div>'+
-                  	'</header>'+
-                  	'<div class="body">'+
-                    	'<pre class="prettyprint linenums">This project is about some thing about project '+i+'</pre>'+
-                  	'</div>'+
-                	'</div>'+
-              	'</div>'
-		$("#displayProjects").append(data);	
-	}
-});
-function viewproject(id){
-	alert("you clicked on project="+id);
-	}
-    </script>
+    <script src="assets/js/gantterDashBoard.js"></script>
   </body>
 
 </html>
