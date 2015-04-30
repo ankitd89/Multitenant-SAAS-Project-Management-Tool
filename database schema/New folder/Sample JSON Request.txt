@@ -17,3 +17,9 @@
     "Priority":"High"
     
 }
+
+//get projectod
+
+{
+	"email_id":"nishant@gmail.com"
+}
