@@ -1,0 +1,59 @@
+// getTasks 
+[
+    {
+        "abc": [
+            {
+                "project_name": "abc",
+                "task_id": 72645,
+                "task_name": "xyz",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Desc": "test",
+                "Task_Type": "Bug",
+                "Assignee": "Nishant",
+                "Status": "Done",
+                "Priority": "High"
+            },
+            {
+                "project_name": "abc",
+                "task_id": 88637,
+                "task_name": "abc",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Desc": "test",
+                "Task_Type": "Bug",
+                "Assignee": "Nishant",
+                "Status": "Done",
+                "Priority": "High"
+            }
+        ]
+    },
+    {
+        "P1": [
+            {
+                "project_name": "P1",
+                "task_id": 18210,
+                "task_name": "T2",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Desc": null,
+                "Task_Type": "Bug",
+                "Assignee": "Nishant",
+                "Status": "Done",
+                "Priority": "High"
+            },
+            {
+                "project_name": "P1",
+                "task_id": 57489,
+                "task_name": "T1",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Desc": "test",
+                "Task_Type": "Bug",
+                "Assignee": "Nishant",
+                "Status": "Done",
+                "Priority": "High"
+            }
+        ]
+    }
+]
