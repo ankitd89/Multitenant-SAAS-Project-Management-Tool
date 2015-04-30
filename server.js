@@ -105,8 +105,8 @@ var SampleApp = function() {
           self.app.use(express.errorHandler());
         }
 
-         self.app.get('/getTasks', KanbanAPIs.getTasks);
-         self.app.get('/getProjects', KanbanAPIs.getProjects);
+         //self.app.get('/getTasks', KanbanAPIs.getTasks);
+         self.app.post('/getProjects', KanbanAPIs.getProjects);
          self.app.post('/createProject', KanbanAPIs.createProject);
          self.app.post('/createTask', KanbanAPIs.createTask);
          self.app.post('/editTask', KanbanAPIs.editTask);

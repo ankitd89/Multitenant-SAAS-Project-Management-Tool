@@ -10,4 +10,10 @@
     "task_name":"abc",
     "start_date": "2015-05-05",
     "end_date":"2015-05-10"
+    "Desc": "test",
+    "Task_Type":"Bug",
+    "Assignee":"Nishant",
+    "Status":"Done",
+    "Priority":"High"
+    
 }
