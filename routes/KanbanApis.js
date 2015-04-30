@@ -1,10 +1,15 @@
 var db = require('./db');
 
 //get requests
-
 this.getProjects = function(req, res, next) {
-   
+   var res_array=[];
+   var projects = [];
+   var super_array = [];
+   var project ;
+   var resUJson=[];
+   var i=0;
 	var email_id= req.body.email_id;
+	var Tasks_JSON_array= JSON.stringify(" ");
 	db.dmlQry('select user_id, tenant_id from Users where email_id = ?',email_id, function(error,result){
 	    if(error){
 	        console.log("Error" + error);
@@ -13,58 +18,56 @@ this.getProjects = function(req, res, next) {
 	    }
 	    user_id=result[0].user_id;
 	    tenant_id = result[0].tenant_id;
+	    
 	    db.dmlQry('select distinct(project_name) from Data_table where user_id = ?',user_id, function(error,result){
 		    if(error){
 		        console.log("Error" + error);
 		        res.writeHead(500, {'Content-Type': "application/json"});
 		        res.end(JSON.stringify({response:error}));
 		    }
-		    console.log(result);
-		    var projects = [];
-		    var i=0;
-		    //console.log(result.length);
-		    for(var j=0;j<result.length;j++)
-		    	{
-		    		projects[i]=result[j].project_name;
-		    		 console.log(projects[i]);
-		    		i++;
-		    	}
+		   
+		    for(var j=0;j<result.length;j++){
+		    	projects[j]=result[j].project_name;
+	    		console.log(projects[j]);
+		    }
+		    
 		    for(var j=0;j<projects.length;j++)
 	    	{
-		    	var project=projects[j];
-		    	 db.dmlQry('select task_id,task_name,start_date,end_date,record_id from Data_table where project_name = ?',projects[j], function(error,result){
-		 		    if(error){
+		    	//var kanban_query = "select task_id, task_name, start_date, end_date, r.record_id,extension_name, GROUP_CONCAT(if(r.extension_id = 7005, value, NULL)) AS 'Desc', GROUP_CONCAT(if(r.extension_id = 7006, value, NULL)) AS 'Task_Type', GROUP_CONCAT(if(r.extension_id = 7007, value, NULL)) AS 'Assignee', GROUP_CONCAT(if(r.extension_id = 7008, value, NULL)) AS 'Status', GROUP_CONCAT(if(r.extension_id = 7009, value, NULL)) AS 'Priority' from Data_table d join record r ON d.record_id = r.record_id join Meta_data md ON md.extension_id = r.extension_id where project_name = ? group by task_id";
+		    	k=0;
+		    	project=projects[j];
+		    	console.log("project + "+project);
+		    	var count =0;
+		    	db.dmlQry('select project_name,task_id, task_name, start_date, end_date, GROUP_CONCAT(if(r.extension_id = 7005, value, NULL)) AS "Desc", GROUP_CONCAT(if(r.extension_id = 7006, value, NULL)) AS "Task_Type", GROUP_CONCAT(if(r.extension_id = 7007, value, NULL)) AS "Assignee", GROUP_CONCAT(if(r.extension_id = 7008, value, NULL)) AS "Status", GROUP_CONCAT(if(r.extension_id = 7009, value, NULL)) AS "Priority" from Data_table d join record r ON d.record_id = r.record_id join Meta_data md ON md.extension_id = r.extension_id where project_name = ? group by task_id',project, function(error,result){
+		 		    count++;
+		    		if(error){
 		 		        console.log("Error" + error);
 		 		        res.writeHead(500, {'Content-Type': "application/json"});
 		 		        res.end(JSON.stringify({response:error}));
 		 		    }
-		 		    console.log("result    "+result);
 		 		    
-		 		    console.log(result.length);
-		 		    console.log(project);
-		 		   /*var result = [];
-		 		  for (var name in goals) {
-		 		    if (goals.hasOwnProperty(name)) {
-		 		      result.push({name: name, goals: goals[name]});
+		 		    else{
+			 		    console.log("What is the result of Query");
+			 		    
+			 		    console.log(result);   
+			 		    var tempProjects = {};
+			 		    tempProjects[result[0].project_name]=  result; 
+			 		    resUJson.push(tempProjects);
+			 		    if(count==projects.length){
+			 			    console.log("Final Output Json");
+			 			    console.log();
+			 			    var finalJson =JSON.stringify(resUJson); 
+			 			    res.writeHead(200, {'Content-Type': "application/json"});
+						    res.end(finalJson);
+				  
+			 		    }
 		 		    }
-		 		  }*/
-		 		   /* var resu = [];
 		 		    
-		 		    for(var i=0;j<result.length;j++)
-		 		    	{
-		 		    		resu.push({project_task : project, project_tasks : [result[i]]});
-		 		    	}*/
-		 		    var result_array = result;
-		 		    var resUJson = {project_name:project, project_task : result};
-		 		    var Tasks_JSON_array = JSON.stringify(resUJson);
-		 		    console.log(Tasks_JSON_array);
-		 		    
-		    	 });
+		 		});
 	    	}
-		    res.end("hello");
-	    });
+		    
 	});
-
+	   });
  }
 
 
