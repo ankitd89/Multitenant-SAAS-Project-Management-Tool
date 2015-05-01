@@ -297,7 +297,63 @@ this.editTask = function(req, res, next) {
                     
                 }
 
-        //to implement
+
+                if(key=="Point_Completed")
+                {
+                    console.log("Point Completed log query");
+                    db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+                        if(error){
+                            console.log("Error" + error);
+                            res.writeHead(500, {'Content-Type': "application/json"});
+                            res.end(JSON.stringify({response:error}));
+                        }
+                    pointcompl_extid= result[0].extension_id;
+                    console.log(pointcompl_extid); 
+                    if(pointcompl_extid!=-1){
+                        var pointscompl_JSON = {
+                                "record_id": record_id,
+                                "extension_id":pointcompl_extid,
+                                "value":req.body.Point_Completed
+                        }
+                        console.log(pointscompl_JSON);
+                        
+                        db.dmlQry('select * from record where extension_id = ? and record_id = ?',[pointcompl_extid, record_id], function(error, result) {
+                            
+                        if(result.length==0)
+                        {
+                        
+                        db.dmlQry('insert into record set ? ', pointscompl_JSON, function(error, result) {
+                            if(error){
+                                console.log("Error" + error);
+                                res.writeHead(500, {'Content-Type': "application/json"});
+                                res.end(JSON.stringify({response:error}));
+                            }
+                            
+                        });
+                        }
+                        
+                        else
+                        {
+                        
+                            db.dmlQry('update record set value =? where extension_id = ? and record_id = ?',[req.body.Point_Completed, pointcompl_extid,record_id], function(error, result) {
+                                if(error){
+                                    console.log("Error" + error);
+                                    res.writeHead(500, {'Content-Type': "application/json"});
+                                    res.end(JSON.stringify({response:error}));
+                                }
+                                
+                            });
+                        
+                        }
+                            
+                        });
+                    }
+                        
+                    });
+                    
+                    
+                }
+
 	    	}
 	    }
 	    
