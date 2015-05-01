@@ -23,8 +23,17 @@ $( document ).ready(function() {
 });
 
 function newProjectSubmit(){
-var data=$("#newProject").serializeArray();
+ var data=$("#newProject").serializeArray();
+ var windowUrl = window.location.href;
+	var query = windowUrl.split("?");
+	var email_id ={
+	 name:"email_id",
+ value : query[1]
+};
+data.push(email_id);
+
  var o = {};
+  // o["email_id"].push(query[1]);
   // var a = this.serializeArray();
    $.each(data, function() {
        if (o[this.name] !== undefined) {
@@ -37,6 +46,7 @@ var data=$("#newProject").serializeArray();
        }
    });
    //return o;
+     
    alert(JSON.stringify(o));
    $.ajax({
     	    type: "POST",

@@ -157,11 +157,11 @@
       
        function findTenantPage(data){
          if(data.tenant_id == '1')
-             return "/dashboardGantter.html"
+             return "/dashboardGantter.html?"+data.email_id;
           else if(data.tenant_id =='2')
-             return "/dashboardKanban.html"
+             return "/dashboardKanban.html?"+data.email_id;
           else if(data.tenant_id =='3')
-             return "/dashboardEasyBacklog.html"
+             return "/dashboardEasyBacklog.html?"+data.email_id;
        }
     </script>
   </body>
