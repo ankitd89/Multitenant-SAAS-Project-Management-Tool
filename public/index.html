@@ -112,8 +112,8 @@
     	    async: false,
     	    crossDomain : true,
     	    success: function(data){
-			console.log("User logged in successfully");
-			window.open("/dashboard.html", "_self");
+			      console.log("User logged in successfully");
+			      window.open(findTenantPage(data), "_self");
     	    },
     	     error: function(response,text,err){
     	    	 alert(err);
@@ -144,14 +144,25 @@
     	    async: false,
     	    crossDomain : true,
     	    success: function(data){
-			console.log("User added successfully");
+			      console.log("User added successfully");
+			      window.open(findTenantPage(data), "_self");
+			      
     	    },
     	     error: function(response,text,err){
     	    	 alert(err);
     	 	 }
     	   });
-       
+ 
       }
+      
+       function findTenantPage(data){
+         if(data.tenant_id == '1')
+             return "/dashboardGantter.html"
+          else if(data.tenant_id =='2')
+             return "/dashboardKanban.html"
+          else if(data.tenant_id =='3')
+             return "/dashboardEasyBacklog.html"
+       }
     </script>
   </body>
 </html>

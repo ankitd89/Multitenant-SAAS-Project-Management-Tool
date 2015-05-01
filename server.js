@@ -108,12 +108,13 @@ var SampleApp = function() {
          //self.app.get('/getTasks', KanbanAPIs.getTasks);
          self.app.post('/getProjects', KanbanAPIs.getProjects);
          self.app.post('/createProject', KanbanAPIs.createProject);
-         self.app.post('/createTask', KanbanAPIs.createTask);
+         self.app.post('/createTaskKanban', KanbanAPIs.createTask);
          self.app.post('/editTask', KanbanAPIs.editTask);
         
          self.app.post('/adduser',  function(req,res){
              
           var user = req.body;  
+          var tenant_id = req.body.tenant_id;
           console.log(user);
           db.dmlQry('insert into Users set ?',user, function(error,result){
             if(error){
@@ -122,8 +123,9 @@ var SampleApp = function() {
                 res.end(JSON.stringify({response:error}));
             }
             else{
-                 res.writeHead(200, {'Content-Type': "application/json"});
-                 res.end(JSON.stringify({response:'Saved to MySQL'}));
+                var replyJson = {tenant_id : tenant_id};
+           	    res.writeHead(200, {'Content-Type': "application/json"});
+                res.end(JSON.stringify(replyJson));
             }          
           });
         });
