@@ -241,6 +241,62 @@ this.editTask = function(req, res, next) {
                 
         }
 
+        if(key=="Points_Expected")
+                {
+                    console.log("Points Expected log query");
+                    db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+                        if(error){
+                            console.log("Error" + error);
+                            res.writeHead(500, {'Content-Type': "application/json"});
+                            res.end(JSON.stringify({response:error}));
+                        }
+                    pointsexp_extid= result[0].extension_id;
+                    console.log(pointsexp_extid); 
+                    if(pointsexp_extid!=-1){
+                        var pointsexp_JSON = {
+                                "record_id": record_id,
+                                "extension_id":pointsexp_extid,
+                                "value":req.body.Points_Expected
+                        }
+                        console.log(pointsexp_JSON);
+                        
+                        db.dmlQry('select * from record where extension_id = ? and record_id = ?',[pointsexp_extid, record_id], function(error, result) {
+                            
+                        if(result.length==0)
+                        {
+                        
+                        db.dmlQry('insert into record set ? ', pointsexp_JSON, function(error, result) {
+                            if(error){
+                                console.log("Error" + error);
+                                res.writeHead(500, {'Content-Type': "application/json"});
+                                res.end(JSON.stringify({response:error}));
+                            }
+                            
+                        });
+                        }
+                        
+                        else
+                        {
+                        
+                            db.dmlQry('update record set value =? where extension_id = ? and record_id = ?',[req.body.Points_Expected, pointsexp_extid,record_id], function(error, result) {
+                                if(error){
+                                    console.log("Error" + error);
+                                    res.writeHead(500, {'Content-Type': "application/json"});
+                                    res.end(JSON.stringify({response:error}));
+                                }
+                                
+                            });
+                        
+                        }
+                            
+                        });
+                    }
+                        
+                    });
+                    
+                    
+                }
+
         //to implement
 	    	}
 	    }
