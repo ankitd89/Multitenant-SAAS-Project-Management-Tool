@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var util = require('util');
 
 function getConnection(){
 	var connection = mysql.createConnection({
@@ -23,7 +24,7 @@ function dmlQry(sqlQuery,data,callback){
 			console.log("ERROR: " + err.message);
 		} else {
 			//return err or result
-			console.log("DB Results:"+result);
+			console.log("DB Results:"+util.inspect(result, false, null));
 			//connection.end();
 			callback(err, result);
 		}

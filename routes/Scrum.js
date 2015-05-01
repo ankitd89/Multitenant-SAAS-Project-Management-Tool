@@ -189,7 +189,7 @@ this.editTask = function(req, res, next) {
 	    		if(key=="Actual_points")
                 {
                 console.log("Actual points log query");
-                db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+                db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
                     if(error){
                         console.log("Error" + error);
                         res.writeHead(500, {'Content-Type': "application/json"});
@@ -244,7 +244,7 @@ this.editTask = function(req, res, next) {
         if(key=="Points_Expected")
                 {
                     console.log("Points Expected log query");
-                    db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+                    db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
                         if(error){
                             console.log("Error" + error);
                             res.writeHead(500, {'Content-Type': "application/json"});
@@ -301,7 +301,7 @@ this.editTask = function(req, res, next) {
                 if(key=="Point_Completed")
                 {
                     console.log("Point Completed log query");
-                    db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+                    db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
                         if(error){
                             console.log("Error" + error);
                             res.writeHead(500, {'Content-Type': "application/json"});
