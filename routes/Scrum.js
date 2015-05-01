@@ -76,21 +76,124 @@ this.getProjects = function(req, res, next) {
 //put
 
 this.editTask = function(req, res, next) {
-    db.dmlQry('insert into registration set ?',registration, function(error,result){
-    if(error){
-        console.log("Error" + error);
-        res.writeHead(500, {'Content-Type': "application/json"});
-        res.end(JSON.stringify({response:error}));
-    }
-    else{
-         res.writeHead(200, {'Content-Type': "application/json"});
-         res.end(JSON.stringify({response:'Saved to MySQL'}));
-    }  
+    
+	
+	var email_id= req.body.email_id;
+	   var user_id;
+	   var tenant_id;
+	   var record_id;
+	   console.log(email_id);
+	  db.dmlQry('select user_id, tenant_id from Users where email_id = ?',email_id, function(error,result){
+	    if(error){
+	        console.log("Error" + error);
+	        res.writeHead(500, {'Content-Type': "application/json"});
+	        res.end(JSON.stringify({response:error}));
+	    }
+	    user_id=result[0].user_id;
+	    tenant_id = result[0].tenant_id;
+	    
+	     var record_id;
+	    var Teamvelocity_extid=-1;
+	    var actualpoints_extid=-1;
+	    var pointsexp_extid=-1;
+	    var pointcompl_extid=-1;
+	   // var pointcompl_extid=-1;
+	    /*var Data_Table_Object={
+	    	    "tenant_id": tenant_id,
+	    	    "user_id":user_id,
+	    	    "project_name":req.body.project_name,
+	    	    "task_id":task_id,
+	    	    "task_name":req.body.task_name,
+	    	    "start_date": req.body.start_date,
+	    	    "end_date":req.body.end_date
+	    	    }*/
+	    
+	    db.dmlQry('update Data_Table set task_name= ?, start_date =?, end_date = ? where task_name = ? and project_name =? and user_id',[req.body.task_name,req.body.start_date,req.body.end_date, req.body.task_name,req.body.project_name,user_id], function(error,result){
+	    if(error){
+	        console.log("Error" + error);
+	        res.writeHead(500, {'Content-Type': "application/json"});
+	        res.end(JSON.stringify({response:error}));
+	    }
+	    else{
+	         res.writeHead(200, {'Content-Type': "application/json"});
+	         res.end(JSON.stringify({response:'Saved to MySQL'}));
+	    }   
+	    db.dmlQry('select record_id from Data_Table where task_name = ? and project_name = ?',[req.body.task_name,req.body.project_name], function(error,result){
+	        if(error){
+	            console.log("Error" + error);
+	            res.writeHead(500, {'Content-Type': "application/json"});
+	            res.end(JSON.stringify({response:error}));
+	        }
+	        console.log(result[0].record_id); // print record_id
+	        record_id= result[0].record_id;
+	        console.log("record_id   "+record_id)
+	    });
+	    
+	    for(var key in req.body){
+	    	if(req.body.hasOwnProperty(key)){
+	    		if(key=="Team_velocity")
+	    			{
+	    			console.log("Team_velocity log query");
+	    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
+	    			    if(error){
+	    			        console.log("Error" + error);
+	    			        res.writeHead(500, {'Content-Type': "application/json"});
+	    			        res.end(JSON.stringify({response:error}));
+	    			    }
+	    			Teamvelocity_extid= result[0].extension_id;
+	    			console.log(Teamvelocity_extid); 
+	    			if(Teamvelocity_extid!=-1){
+	    				var teamvelocity_JSON = {
+	    						"record_id": record_id,
+	    						"extension_id":Teamvelocity_extid,
+	    						"value":req.body.Team_velocity
+	    				}
+	    				console.log(teamvelocity_JSON);
+	    				
+	    				db.dmlQry('select * from record where extension_id = ? and record_id = ?',[Teamvelocity_extid, record_id], function(error, result) {
+	    					
+	    				if(result.length==0)
+	    				{
+	    				
+	    				db.dmlQry('insert into record set ? ', teamvelocity_JSON, function(error, result) {
+	    					if(error){
+	    				        console.log("Error" + error);
+	    				        res.writeHead(500, {'Content-Type': "application/json"});
+	    				        res.end(JSON.stringify({response:error}));
+	    				    }
+	    				    
+	    				});
+	    				}
+	    				
+	    				else
+	    				{
+	    				
+	    					db.dmlQry('update record set value =? where extension_id = ? and record_id = ?',[req.body.Team_velocity, Teamvelocity_extid,record_id], function(error, result) {
+		    					if(error){
+		    				        console.log("Error" + error);
+		    				        res.writeHead(500, {'Content-Type': "application/json"});
+		    				        res.end(JSON.stringify({response:error}));
+		    				    }
+		    				    
+		    				});
+	    				
+	    				}
+	    					
+	    				});
+	    			}
+	    				
+	    			});
+	    			
+	    	}
+	    		
+	    		// to implement
+	    	}
+	    }
+	    
+	  });
+	    });
 
-    return res.render('userProfile',{'firstName':user.firstName,'lastName': user.lastName,'EmailAddress': user._id,'WhatILike': user.whatilike,'Distance':user.Distance});
-        
-	});
-
+ 
  }
 
  //post
