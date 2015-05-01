@@ -1,28 +1,50 @@
 $( document ).ready(function() {
     
-    
-    
-    
-/*	for(var i=0;i<5;i++)
-	{
-		var data='<div class="col-lg-4">'+
+     Metis.formGeneral();
+     var windowUrl = window.location.href;
+	var query = windowUrl.split("?");
+	var email_id ={
+	 name:"email_id",
+ value : query[1]
+};
+     
+    alert(email_id); 
+    /* $.ajax({
+    	    type: "GET",
+    	    url: "/getProjects",
+    	    dataType: 'json',
+    	    data : email_id,
+    	    async: false,
+    	    crossDomain : true,
+    	    success: function(o){
+    	     var data='<div class="col-lg-4">'+
                 	'<div class="box">'+
                   	'<header>'+
-                    	'<h5>Project '+i+'</h5>'+
+                    	'<h5>'+o.projectName+'</h5>'+
                     	'<div class="toolbar">'+
-                      '<button class="btn btn-xs btn-primary" onclick="viewproject('+i+');">View</button>'+
+                      '<button id='+o.projectName+' class="btn btn-xs btn-primary" onclick="viewproject(this.id);">View</button>'+
                     	'</div>'+
                   	'</header>'+
                   	'<div class="body">'+
-                    	'<pre class="prettyprint linenums">This project is about some thing about project '+i+'</pre>'+
+                    	'<pre class="prettyprint linenums">'+o.description+'</pre>'+
                   	'</div>'+
                 	'</div>'+
               	'</div>'
-		$("#displayProjects").append(data);	
-	}*/
+		$("#displayProjects").append(data);
+		
+$("#closemodel").click();
+			       console.log("User added successfully");
+			       alert("Task Added");
+			      
+    	    },
+    	     error: function(response,text,err){
+    	    	 alert(err);
+    	 	 }
+    	   });*/
 });
 
 function newProjectSubmit(){
+ alert("called?");
  var data=$("#newProject").serializeArray();
  var windowUrl = window.location.href;
 	var query = windowUrl.split("?");
@@ -56,6 +78,22 @@ data.push(email_id);
     	    async: false,
     	    crossDomain : true,
     	    success: function(data){
+    	     var data='<div class="col-lg-4">'+
+                	'<div class="box">'+
+                  	'<header>'+
+                    	'<h5>'+o.project_name+'</h5>'+
+                    	'<div class="toolbar">'+
+                      '<button id='+o.project_name+' class="btn btn-xs btn-primary" onclick="viewproject(this.id);">View</button>'+
+                    	'</div>'+
+                  	'</header>'+
+                  	'<div class="body">'+
+                    	'<pre class="prettyprint linenums">'+o.Desc+'</pre>'+
+                  	'</div>'+
+                	'</div>'+
+              	'</div>'
+		$("#displayProjects").append(data);
+		
+$("#closemodel").click();
 			       console.log("User added successfully");
 			       alert("Task Added");
 			      

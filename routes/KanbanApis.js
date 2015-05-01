@@ -33,12 +33,12 @@ this.getProjects = function(req, res, next) {
 		    
 		    for(var j=0;j<projects.length;j++)
 	    	{
-		    	//var kanban_query = "select task_id, task_name, start_date, end_date, r.record_id,extension_name, GROUP_CONCAT(if(r.extension_id = 7005, value, NULL)) AS 'Desc', GROUP_CONCAT(if(r.extension_id = 7006, value, NULL)) AS 'Task_Type', GROUP_CONCAT(if(r.extension_id = 7007, value, NULL)) AS 'Assignee', GROUP_CONCAT(if(r.extension_id = 7008, value, NULL)) AS 'Status', GROUP_CONCAT(if(r.extension_id = 7009, value, NULL)) AS 'Priority' from Data_table d join record r ON d.record_id = r.record_id join Meta_data md ON md.extension_id = r.extension_id where project_name = ? group by task_id";
+		    	//var kanban_query = "select task_id, task_name, start_date, end_date, r.record_id,extension_name, GROUP_CONCAT(if(r.extension_id = 7005, value, NULL)) AS 'Desc', GROUP_CONCAT(if(r.extension_id = 7006, value, NULL)) AS 'Task_Type', GROUP_CONCAT(if(r.extension_id = 7007, value, NULL)) AS 'Assignee', GROUP_CONCAT(if(r.extension_id = 7008, value, NULL)) AS 'Status', GROUP_CONCAT(if(r.extension_id = 7009, value, NULL)) AS 'Priority' from Data_table d join record r ON d.record_id = r.record_id join Meta_Data md ON md.extension_id = r.extension_id where project_name = ? group by task_id";
 		    	k=0;
 		    	project=projects[j];
 		    	console.log("project + "+project);
 		    	var count =0;
-		    	db.dmlQry('select project_name,task_id, task_name, start_date, end_date, GROUP_CONCAT(if(r.extension_id = 7005, value, NULL)) AS "Desc", GROUP_CONCAT(if(r.extension_id = 7006, value, NULL)) AS "Task_Type", GROUP_CONCAT(if(r.extension_id = 7007, value, NULL)) AS "Assignee", GROUP_CONCAT(if(r.extension_id = 7008, value, NULL)) AS "Status", GROUP_CONCAT(if(r.extension_id = 7009, value, NULL)) AS "Priority" from Data_table d join record r ON d.record_id = r.record_id join Meta_data md ON md.extension_id = r.extension_id where project_name = ? group by task_id',project, function(error,result){
+		    	db.dmlQry('select project_name,task_id, task_name, start_date, end_date, GROUP_CONCAT(if(r.extension_id = 7005, value, NULL)) AS "Desc", GROUP_CONCAT(if(r.extension_id = 7006, value, NULL)) AS "Task_Type", GROUP_CONCAT(if(r.extension_id = 7007, value, NULL)) AS "Assignee", GROUP_CONCAT(if(r.extension_id = 7008, value, NULL)) AS "Status", GROUP_CONCAT(if(r.extension_id = 7009, value, NULL)) AS "Priority" from Data_table d join record r ON d.record_id = r.record_id join Meta_Data md ON md.extension_id = r.extension_id where project_name = ? group by task_id',project, function(error,result){
 		 		    count++;
 		    		if(error){
 		 		        console.log("Error" + error);
@@ -134,7 +134,7 @@ this.editTask = function(req, res, next) {
 	    		if(key=="Desc")
 	    			{
 	    			console.log("Desc log query");
-	    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+	    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
 	    			    if(error){
 	    			        console.log("Error" + error);
 	    			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -188,7 +188,7 @@ this.editTask = function(req, res, next) {
 	    		if(key=="Task_Type")
     			{
     			console.log("Task_Type log query");
-    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
     			    if(error){
     			        console.log("Error" + error);
     			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -242,7 +242,7 @@ this.editTask = function(req, res, next) {
 	    		if(key=="Status")
 				{
 	    			console.log("Status log query");
-	    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+	    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
 	    			    if(error){
 	    			        console.log("Error" + error);
 	    			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -297,7 +297,7 @@ this.editTask = function(req, res, next) {
 	    		if(key=="Assignee")
 				{
 	    			console.log("Assignee log query");
-	    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+	    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
 	    			    if(error){
 	    			        console.log("Error" + error);
 	    			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -352,7 +352,7 @@ this.editTask = function(req, res, next) {
 	    		if(key=="Priority")
 				{
 	    			console.log("Priority log query");
-	    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+	    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
 	    			    if(error){
 	    			        console.log("Error" + error);
 	    			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -421,6 +421,7 @@ this.createTask = function(req, res, next) {
    var tenant_id;
    var record_id;
    console.log(email_id);
+   console.log("++Json Received=="+req.body);
   db.dmlQry('select user_id, tenant_id from Users where email_id = ?',email_id, function(error,result){
     if(error){
         console.log("Error" + error);
@@ -474,7 +475,7 @@ this.createTask = function(req, res, next) {
     		if(key=="Desc")
     			{
     			console.log("Desc log query");
-    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
     			    if(error){
     			        console.log("Error" + error);
     			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -503,7 +504,7 @@ this.createTask = function(req, res, next) {
     	}
     		if(key=="Task_Type")
 			{
-    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
     			    if(error){
     			        console.log("Error" + error);
     			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -536,7 +537,7 @@ this.createTask = function(req, res, next) {
     		if(key=="Status")
 			{
     			console.log("status log query");
-    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
     			    if(error){
     			        console.log("Error" + error);
     			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -569,7 +570,7 @@ this.createTask = function(req, res, next) {
     		if(key=="Assignee")
 			{
     			console.log("Assignee log query");
-    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
     			    if(error){
     			        console.log("Error" + error);
     			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -602,7 +603,7 @@ this.createTask = function(req, res, next) {
     		if(key=="Priority")
 			{
     			console.log("Priority log query");
-    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
     			    if(error){
     			        console.log("Error" + error);
     			        res.writeHead(500, {'Content-Type': "application/json"});
