@@ -110,6 +110,10 @@ var SampleApp = function() {
          self.app.post('/createProject', KanbanAPIs.createProject);
          self.app.post('/createTaskKanban', KanbanAPIs.createTask);
          self.app.post('/editTask', KanbanAPIs.editTask);
+         self.app.post('/getScrumProjects', Scrum.getProjects);
+         self.app.post('/createScrumProject', Scrum.createProject);
+         self.app.post('/editScrumTask', Scrum.editTask);
+
         
          self.app.post('/adduser',  function(req,res){
              
