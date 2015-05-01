@@ -23,3 +23,20 @@
 {
 	"email_id":"nishant@gmail.com"
 }
+
+
+//json for gantter- data table
+{
+    "email_id":"ankit@yahoo.com",
+    "project_name":"abc",
+    "task_name":"abc",
+    "start_date": "2015-05-05",
+    "end_date":"2015-05-10"
+    "Duration": 40,
+    "Cost": 200,
+    "Risk": "Security Risks",
+    "Resource":"Nupoor"
+    
+}
+
+

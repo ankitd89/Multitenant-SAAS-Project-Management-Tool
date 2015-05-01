@@ -9,7 +9,8 @@ var express = require('express')
   , cors = require('cors')
   , db = require('./routes/db')
   ,KanbanAPIs= require('./routes/KanbanApis')
-  ,Scrum= require('./routes/Scrum');  
+  ,Scrum= require('./routes/Scrum'),
+  Gantter= require('./routes/Gantter');  
   
 
 /**
@@ -112,8 +113,11 @@ var SampleApp = function() {
          self.app.post('/createTaskKanban', KanbanAPIs.createTask);
          self.app.post('/editTask', KanbanAPIs.editTask);
          self.app.post('/getScrumProjects', Scrum.getProjects);
-         self.app.post('/createScrumProject', Scrum.createProject);
+         self.app.post('/createScrumTask', Scrum.createTask);
          self.app.post('/editScrumTask', Scrum.editTask);
+         self.app.post('/getGantterProjects', Gantter.getProjects);
+         self.app.post('/createGantterTask', Gantter.createTask);
+         self.app.post('/editGantterTask', Gantter.editTask);
 
         
          self.app.post('/adduser',  function(req,res){
