@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Kanaban-Dashboard</title>
+    <title>Kanban-Forms</title>
 
     <!--IE Compatibility modes-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,6 +22,10 @@
 
     <!-- metisMenu stylesheet -->
     <link rel="stylesheet" href="assets/lib/metismenu/metisMenu.min.css">
+    <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css">
+
+        <!-- metisMenu stylesheet -->
+    <link rel="stylesheet" href="assets/lib/metismenu/metisMenu.min.css">
     <link rel="stylesheet" href="assets/lib/jquery.uniform/themes/default/css/uniform.default.css">
     <link rel="stylesheet" href="assets/lib/inputlimiter/jquery.inputlimiter.css">
     <link rel="stylesheet" href="assets/lib/chosen/chosen.min.css">
@@ -34,6 +38,7 @@
     <link rel="stylesheet" href="assets/lib/switch/css/bootstrap3/bootstrap-switch.min.css">
     <link rel="stylesheet" href="assets/lib/jasny-bootstrap/css/jasny-bootstrap.min.css">
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,7 +48,15 @@
         <script src="assets/lib/respond/respond.min.js"></script>
         <![endif]-->
 
-    <!--<link rel="stylesheet" href="assets/css/style-switcher.css">-->
+    <!--For Development Only. Not required -->
+    <script>
+      less = {
+        env: "development",
+        relativeUrls: false,
+        rootpath: "../assets/"
+      };
+    </script>
+    <link rel="stylesheet" href="assets/css/style-switcher.css">
     <link rel="stylesheet/less" type="text/css" href="assets/css/less/theme.html">
     <script src="assets/lib/less/less-1.7.5.min.js"></script>
 
@@ -238,6 +251,7 @@
            
               
             </div>
+            
           </div><!-- /.inner -->
         </div><!-- /.outer -->
       </div><!-- /#content -->
@@ -251,91 +265,96 @@
     <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content">
+      <div id="kanbanformModel" class="modal-content" >
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
+          <h4 class="modal-title">Kanban New Project</h4>
         
+        </div>
+        <div class="modal-body">
         <div class="body" id="colorPickerBlock">
-            <form  id="newProject" class="form-horizontal" action="JavaScript:newProjectSubmit();">
-              <div class="form-group">
-                <label for="cp1" class="control-label col-lg-4">Project Name</label>
-                <div class="col-lg-4">
-                  <input type="text" name="projectName" id="projectName" placeholder="Project Name" class="form-control">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="cp2" class="control-label col-lg-4">Task Name</label>
-                <div class="col-lg-4">
-                   <input type="text" name="taskName" id="taskName" placeholder="Task Name" class="form-control">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="cp3" class="control-label col-lg-4">Start Date</label>
-                <div class="col-lg-4">
-                  <div class="input-group input-append date" id="dp1" data-date="2015-04-28" data-date-format="yyyy-mm-dd">
-                    <input class="form-control" type="text" value="28-04-2015" name = startdate>
-                    <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-                  </div><!-- /input-group -->
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="cp3" class="control-label col-lg-4">Finish Date</label>
-                <div class="col-lg-4">
-                  <div class="input-group input-append date" id="dp2" data-date="2015-04-28" data-date-format="yyyy-mm-dd">
-                    <input class="form-control" type="text" value="28-04-2015" name = finishdate>
-                    <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-                  </div><!-- /input-group -->
-                </div>
-              </div>
-               <div class="form-group">
-                <label for="autosize" class="control-label col-lg-4">Description</label>
-                <div class="col-lg-4">
-                  <textarea name="description" id="autosize" placeholder="Enter Project Description" class="form-control"></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="cp2" class="control-label col-lg-4">Task Type</label>
-                <div class="col-lg-4">
-                   <select name="task_type" id="task_type" class="form-control">
+                    <form  id="newProject" class="form-horizontal" action="JavaScript:newProjectSubmit();">
+                      <div class="form-group">
+                        <label for="cp1" class="control-label col-lg-4">Project Name</label>
+                        <div class="col-lg-4	">
+                          <input type="text" name="projectName" id="projectName" placeholder="Project Name" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp2" class="control-label col-lg-4">Task Name</label>
+                        <div class="col-lg-4">
+				 <input type="text" name="taskName" id="taskName" placeholder="Task Name" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp3" class="control-label col-lg-4">Start Date</label>
+                        <div class="col-lg-4">
+                          <div class="input-group input-append date" id="dp1" data-date="28-04-2015" data-date-format="dd-mm-yyyy">
+                            <input class="form-control" name="start_date" type="text" value="28-04-2015" readonly>
+                            <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+                          </div><!-- /input-group -->
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp3" class="control-label col-lg-4">Finish Date</label>
+                        <div class="col-lg-4">
+                          <div class="input-group input-append date" id="dp2" data-date="28-04-2015" data-date-format="dd-mm-yyyy">
+                            <input class="form-control" type="text" name="end_date" value="28-04-2015" readonly>
+                            <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+                          </div><!-- /input-group -->
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label for="autosize" class="control-label col-lg-4">Description</label>
+                        <div class="col-lg-4">
+                          <textarea name="description" id="autosize" placeholder="Enter Project Description" class="form-control"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp2" class="control-label col-lg-4">Task Type</label>
+                        <div class="col-lg-4">
+				 <select name="task_type" id="task_type" class="form-control">
 
-                      <option value="None">None</option>
-                      <option value="saab">Bug</option>
-                      <option value="opel">Support Request</option>
-                      <option value="audi">Feature Request</option>
-                    </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="cp2" class="control-label col-lg-4">Assignee</label>
-                <div class="col-lg-4">
-                  <input type="text" name="assignee" id="assignee" placeholder="Assignee" class="form-control">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="cp2" class="control-label col-lg-4">Status</label>
-                <div class="col-lg-4">
-                  <input type="text" name="status" id="status" placeholder="Status" class="form-control">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="cp2" class="control-label col-lg-4">Priority</label>
-                <div class="col-lg-4">
-                  <select name="task_type" id="task_type" class="form-control">
-                    <option value="None">Average</option>
-                    <option value="saab">High</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group" align="center">
-                 <button class="btn btn-group-sm btn-primary btn-block" style="width:20% !important;"  type="submit">Submit</button>
-              </div>
-            </form>
-        </div><!-- /.BODY -->
+  <option value="None">None</option>
+  <option value="saab">Bug</option>
+  <option value="opel">Support Request</option>
+  <option value="audi">Feature Request</option>
+</select>
+                        </div>
+</div>
+                      <div class="form-group">
+                        <label for="cp2" class="control-label col-lg-4">Assignee</label>
+                        <div class="col-lg-4">
+				 <input type="text" name="assignee" id="assignee" placeholder="Assignee" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp2" class="control-label col-lg-4">Status</label>
+                        <div class="col-lg-4">
+				 <input type="text" name="status" id="status" placeholder="Status" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cp2" class="control-label col-lg-4">Priority</label>
+                        <div class="col-lg-4">
+         <select name="Priority" id="task_type" class="form-control">
+
+  <option value="None">Average</option>
+  <option value="saab">High</option>
+</select>
+                        </div>
+                      </div>
+                      <div class="form-group" align="center">
+                       <button class="btn btn-group-sm btn-primary btn-block" style="width:20% !important;"  type="submit">Submit</button>
+                       </div>
+
+                    </form>
+                  </div>
+        </div>
+        <!-- /.BODY -->
         
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id="closemodel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
         
       </div>
@@ -344,12 +363,21 @@
   </div><!--My Modal div end -->
     <!--jQuery 2.1.1 -->
     <script src="assets/lib/jquery/jquery.min.js"></script>
-
+    <script src="../../cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
 
     <!--Bootstrap -->
     <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
+
     <!-- MetisMenu -->
     <script src="assets/lib/metismenu/metisMenu.min.js"></script>
+
+    <!-- Screenfull -->
+    <script src="assets/lib/screenfull/screenfull.js"></script>
+
+    <!-- Metis core scripts -->
+    <script src="assets/js/core.min.js"></script>
+
+ <script src="assets/lib/metismenu/metisMenu.min.js"></script>
 
     <!-- Screenfull -->
     <script src="assets/lib/screenfull/screenfull.js"></script>
@@ -368,13 +396,54 @@
     <script src="assets/lib/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
 
 
-    <!-- Metis core scripts -->
-    <script src="assets/js/core.min.js"></script>
-
     <!-- Metis demo scripts -->
     <script src="assets/js/app.min.js"></script>
-    <!--<script src="assets/js/style-switcher.min.js"></script>-->
-    <script src="assets/js/dashboardKanban.js"></script>
+    <script src="assets/js/style-switcher.min.js"></script>
+    <script type="application/javascript">
+	$(document).ready(function(e) {
+         Metis.formGeneral();
+    });
+	function newProjectSubmit(){
+var data=$("#newProject").serializeArray();
+ var o = {};
+  // var a = this.serializeArray();
+   $.each(data, function() {
+       if (o[this.name] !== undefined) {
+           if (!o[this.name].push) {
+               o[this.name] = [o[this.name]];
+           }
+           o[this.name].push(this.value || '');
+       } else {
+           o[this.name] = this.value || '';
+       }
+   });
+   //return o;
+      // alert(JSON.stringify(o));
+	   
+	
+		var data='<div class="col-lg-4">'+
+                	'<div class="box">'+
+                  	'<header>'+
+                    	'<h5>'+o.projectName+'</h5>'+
+                    	'<div class="toolbar">'+
+                      '<button id='+o.projectName+' class="btn btn-xs btn-primary" onclick="viewproject(this.id);">View</button>'+
+                    	'</div>'+
+                  	'</header>'+
+                  	'<div class="body">'+
+                    	'<pre class="prettyprint linenums">'+o.description+'</pre>'+
+                  	'</div>'+
+                	'</div>'+
+              	'</div>'
+		$("#displayProjects").append(data);
+$("#closemodel").click();
+	}
+function viewproject(id){
+	
+	alert("you clicked on project="+id);
+	}
+    </script>
+
+
   </body>
 
 </html>
