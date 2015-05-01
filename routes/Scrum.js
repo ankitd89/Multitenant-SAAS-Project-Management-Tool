@@ -154,7 +154,7 @@ this.createTask = function(req, res, next) {
     		if(key=="Team_velocity")
     			{
     			console.log("Team_velocity log query");
-    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
     			    if(error){
     			        console.log("Error" + error);
     			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -183,7 +183,7 @@ this.createTask = function(req, res, next) {
     	}
     		if(key=="Actual_points")
 			{
-    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
     			    if(error){
     			        console.log("Error" + error);
     			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -216,7 +216,7 @@ this.createTask = function(req, res, next) {
     		if(key=="Points_Expected")
 			{
     			console.log("Points expected log query");
-    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
     			    if(error){
     			        console.log("Error" + error);
     			        res.writeHead(500, {'Content-Type': "application/json"});
@@ -249,7 +249,7 @@ this.createTask = function(req, res, next) {
     		if(key=="Point_Completed")
 			{
     			console.log("Point_Completed log query");
-    			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
     			    if(error){
     			        console.log("Error" + error);
     			        res.writeHead(500, {'Content-Type': "application/json"});

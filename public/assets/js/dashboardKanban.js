@@ -9,7 +9,7 @@ $( document ).ready(function() {
 };
      
     alert(email_id); 
-    /* $.ajax({
+     $.ajax({
     	    type: "GET",
     	    url: "/getProjects",
     	    dataType: 'json',
@@ -40,11 +40,11 @@ $("#closemodel").click();
     	     error: function(response,text,err){
     	    	 alert(err);
     	 	 }
-    	   });*/
+    	   });
 });
 
 function newProjectSubmit(){
- alert("called?");
+ 
  var data=$("#newProject").serializeArray();
  var windowUrl = window.location.href;
 	var query = windowUrl.split("?");
@@ -95,8 +95,6 @@ data.push(email_id);
 		
 $("#closemodel").click();
 			       console.log("User added successfully");
-			       alert("Task Added");
-			      
     	    },
     	     error: function(response,text,err){
     	    	 alert(err);
