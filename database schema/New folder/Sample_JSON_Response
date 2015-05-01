@@ -57,3 +57,120 @@
         ]
     }
 ]
+
+
+
+Gantter Response
+
+[
+    {
+        "G1": [
+            {
+                "project_name": "G1",
+                "task_id": 26832,
+                "task_name": "G1.2",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Duration": "40",
+                "Cost": "200",
+                "Risk": "Security Risks",
+                "Resource": "Nupoor"
+            },
+            {
+                "project_name": "G1",
+                "task_id": 53324,
+                "task_name": "G1.1",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Duration": "40",
+                "Cost": "200",
+                "Risk": "Security Risks",
+                "Resource": "Nupoor"
+            }
+        ]
+    },
+    {
+        "G2": [
+            {
+                "project_name": "G2",
+                "task_id": 38882,
+                "task_name": "G2.1",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Duration": "40",
+                "Cost": null,
+                "Risk": "Security Risks",
+                "Resource": "Nupoor"
+            },
+            {
+                "project_name": "G2",
+                "task_id": 76867,
+                "task_name": "G2.2",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Duration": "40",
+                "Cost": "200",
+                "Risk": "Security Risks",
+                "Resource": "Nupoor"
+            }
+        ]
+    }
+]
+
+
+// Actual JSON output for get projects API
+
+[
+    {
+        "S1": [
+            {
+                "project_name": "S1",
+                "task_id": 18695,
+                "task_name": "S1.1",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Team_velocity": "40",
+                "Actual_points": "200",
+                "Points_Expected": "200",
+                "Point_Completed": "150"
+            },
+            {
+                "project_name": "S1",
+                "task_id": 57785,
+                "task_name": "S1.2",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Team_velocity": "40",
+                "Actual_points": "200",
+                "Points_Expected": "200",
+                "Point_Completed": "150"
+            }
+        ]
+    },
+    {
+        "S2": [
+            {
+                "project_name": "S2",
+                "task_id": 11705,
+                "task_name": "S2.1",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Team_velocity": "40",
+                "Actual_points": "200",
+                "Points_Expected": "200",
+                "Point_Completed": "150"
+            },
+            {
+                "project_name": "S2",
+                "task_id": 54171,
+                "task_name": "S2.2",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Team_velocity": "40",
+                "Actual_points": "200",
+                "Points_Expected": "200",
+                "Point_Completed": "150"
+            }
+        ]
+    }
+]

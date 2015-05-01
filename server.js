@@ -124,6 +124,8 @@ var SampleApp = function() {
              
           var user = req.body;  
           var tenant_id = req.body.tenant_id;
+          var email_id = req.body.email_id;
+          var password = req.body.password;
           console.log(user);
           db.dmlQry('insert into Users set ?',user, function(error,result){
             if(error){
@@ -132,7 +134,10 @@ var SampleApp = function() {
                 res.end(JSON.stringify({response:error}));
             }
             else{
-                var replyJson = {tenant_id : tenant_id};
+                var replyJson = {email_id : email_id,
+           	    				tenant_id : tenant_id,
+           	    				password : password};
+                
            	    res.writeHead(200, {'Content-Type': "application/json"});
                 res.end(JSON.stringify(replyJson));
             }          

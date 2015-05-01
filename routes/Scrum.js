@@ -38,7 +38,7 @@ this.getProjects = function(req, res, next) {
 		    	project=projects[j];
 		    	console.log("project + "+project);
 		    	var count =0;
-		    	db.dmlQry('select project_name,task_id, task_name, start_date, end_date, GROUP_CONCAT(if(r.extension_id = 7010, value, NULL)) AS "Team_velocity", GROUP_CONCAT(if(r.extension_id = 7011, value, NULL)) AS "Actual_points", GROUP_CONCAT(if(r.extension_id = 7012, value, NULL)) AS "Points_Expected", GROUP_CONCAT(if(r.extension_id = 7013, value, NULL)) AS "Points_Completed" from Data_table d join record r ON d.record_id = r.record_id join Meta_data md ON md.extension_id = r.extension_id where project_name = ? group by task_id',project, function(error,result){
+		    	db.dmlQry('select project_name,task_id, task_name, start_date, end_date, GROUP_CONCAT(if(r.extension_id = 7010, value, NULL)) AS "Team_velocity", GROUP_CONCAT(if(r.extension_id = 7011, value, NULL)) AS "Actual_points", GROUP_CONCAT(if(r.extension_id = 7012, value, NULL)) AS "Points_Expected", GROUP_CONCAT(if(r.extension_id = 7013, value, NULL)) AS "Point_Completed" from Data_table d join record r ON d.record_id = r.record_id join Meta_data md ON md.extension_id = r.extension_id where project_name = ? group by task_id',project, function(error,result){
 		 		    count++;
 		    		if(error){
 		 		        console.log("Error" + error);
@@ -246,9 +246,9 @@ this.createTask = function(req, res, next) {
     			
     			
 			}
-    		if(key=="Points_Completed")
+    		if(key=="Point_Completed")
 			{
-    			console.log("Points_Completed log query");
+    			console.log("Point_Completed log query");
     			db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
     			    if(error){
     			        console.log("Error" + error);
@@ -262,7 +262,7 @@ this.createTask = function(req, res, next) {
     				var ptscmp_JSON = {
     						"record_id": record_id,
     						"extension_id":ptscmp_extid,
-    						"value":req.body.Points_Completed
+    						"value":req.body.Point_Completed
     				}
     				console.log(ptscmp_JSON);
     				
