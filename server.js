@@ -8,7 +8,8 @@ var express = require('express')
   , request = require('request')
   , cors = require('cors')
   , db = require('./routes/db')
-  ,KanbanAPIs= require('./routes/KanbanApis');  
+  ,KanbanAPIs= require('./routes/KanbanApis')
+  ,Scrum= require('./routes/Scrum');  
   
 
 /**
