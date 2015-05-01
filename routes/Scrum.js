@@ -186,7 +186,62 @@ this.editTask = function(req, res, next) {
 	    			
 	    	}
 	    		
-	    		// to implement
+	    		if(key=="Actual_points")
+                {
+                console.log("Actual points log query");
+                db.dmlQry('select extension_id from meta_data where extension_name =?',key, function(error,result){
+                    if(error){
+                        console.log("Error" + error);
+                        res.writeHead(500, {'Content-Type': "application/json"});
+                        res.end(JSON.stringify({response:error}));
+                    }
+                actualpoints_extid= result[0].extension_id;
+                console.log(actualpoints_extid); 
+                if(actualpoints_extid!=-1){
+                    var actuapoints_JSON = {
+                            "record_id": record_id,
+                            "extension_id":actualpoints_extid,
+                            "value":req.body.Actual_points
+                    }
+                    console.log(actuapoints_JSON);
+                    
+                    db.dmlQry('select * from record where extension_id = ? and record_id = ?',[actualpoints_extid, record_id], function(error, result) {
+                        
+                    if(result.length==0)
+                    {
+                    
+                    db.dmlQry('insert into record set ? ', actuapoints_JSON, function(error, result) {
+                        if(error){
+                            console.log("Error" + error);
+                            res.writeHead(500, {'Content-Type': "application/json"});
+                            res.end(JSON.stringify({response:error}));
+                        }
+                        
+                    });
+                    }
+                    
+                    else
+                    {
+                    
+                        db.dmlQry('update record set value =? where extension_id = ? and record_id = ?',[req.body.Actual_points, actualpoints_extid,record_id], function(error, result) {
+                            if(error){
+                                console.log("Error" + error);
+                                res.writeHead(500, {'Content-Type': "application/json"});
+                                res.end(JSON.stringify({response:error}));
+                            }
+                            
+                        });
+                    
+                    }
+                        
+                    });
+                }
+                    
+                });
+                
+        }
+
+        //to implement
 	    	}
 	    }
 	    
