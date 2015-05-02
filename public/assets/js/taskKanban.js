@@ -104,21 +104,9 @@ $("#closemodel").click();
 	}
 function viewproject(id){
 	console.log("you clicked on view of  project="+id);
-	var windowUrl = window.location.href;
-	var query = windowUrl.split("?");
-	    
-	window.open("/taskKanban.html?" + query[1] + "?" + id, "_self");
 	
 	}
 	function viewstatus(id){
 	console.log("you clicked on status of project="+id);
 	
-	}
-	
-	function navigateToDashboard()
-	{
-	 var windowUrl = window.location.href;
-	 var query = windowUrl.split("?");
-	 window.open("/dashboardKanban.html?" + query[1], "_self");
-	 
 	}
