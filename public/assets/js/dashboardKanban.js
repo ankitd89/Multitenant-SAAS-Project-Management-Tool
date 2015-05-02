@@ -8,7 +8,7 @@ $( document ).ready(function() {
      };
      
     //alert(JSON.stringify(email_id)); 
-     $.ajax({
+    $.ajax({
     	    type: "POST",
     	    url: "/getProjects",
     	    dataType: 'json',
@@ -68,9 +68,7 @@ data.push(email_id);
            o[this.name] = this.value || '';
        }
    });
-   //return o;
-     
-   alert(JSON.stringify(o));
+   
    $.ajax({
     	    type: "POST",
     	    url: "/createTaskKanban",
@@ -79,20 +77,11 @@ data.push(email_id);
     	    async: false,
     	    crossDomain : true,
     	    success: function(data){
-    	     var data='<div class="col-lg-4">'+
-                	'<div class="box">'+
-                  	'<header>'+
-                    	'<h5>'+o.project_name+'</h5>'+
-                    	'<div class="toolbar">'+
-                    	'<button id='+o.project_name+' class="btn btn-xs btn-success" onclick="viewstatus(this.id);">Status</button>'+
-                      '<button id='+o.project_name+' class="btn btn-xs btn-primary" onclick="viewproject(this.id);">View</button>'+
-                    	'</div>'+
-                  	'</header>'+
-              	'</div>'
-		$("#displayProjects").append(data);
+    	    
 		
 $("#closemodel").click();
-			       console.log("User added successfully");
+			       console.log("User task successfully");
+			       location.reload();
     	    },
     	     error: function(response,text,err){
     	    	 alert(err);

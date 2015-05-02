@@ -22,26 +22,74 @@ $( document ).ready(function() {
     	    {
     	     var test=o[i].projects;
     	     console.log("test print"+JSON.stringify(test));
+    	    var pname=query[2].split("#");
+    	    if(test.length != 0 && test[0].project_name==pname[0])
+    	    {
+    	    
+    	      for(var j = 0;j<test.length;j++)
+    	      {
+    	         if(j==0)
+    	         {
+    	           $("#projectNameSet").append(test[j].project_name);
+    	         }
+    	         if(test[j].Status=="InProgress")
+    	         {
+    	           var passdata=(test[j]);
+    	            var data='<div id="'+j+'" style="background-color:hsla(210,100%,60%,0.5); border:1px solid #ccc; border-radius:4px; padding:3px; margin:2px;" >'+
+    	            '<div align="right"><a title="'+j+'" data-original-title="" href="#" class="btn btn-primary btn-xs" onclick="editTask(this.title)"><i class="fa fa-edit" > Edit</i></a></div>'+
+                   '<p><span class="label label-default">Task Name</span> : '+test[j].task_name+'</p>'+
+                    '<p><span class="label label-info">Description</span> : '+test[j].Desc+'</p>'+
+                    '<p><span class="label label-primary">Assignee</span> : '+test[j].Assignee+'</p>'+
+                    '<p><span class="label label-default">Priority</span> : '+test[j].Priority+'</p>'+
+                  '</div>';
+    	       
+    	             $("#inProgresSet").append(data);
+    	              $("#"+j).data("test",test[j]);
+    	   
+    	         }
+    	         else if(test[j].Status=="Done")
+    	         {
+    	           var passdata=JSON.stringify(test[j]);
+    	            var data='<div id="'+j+'" style="background-color:hsla(90,100%,60%,0.5); border:1px solid #ccc; border-radius:4px; padding:3px; margin:2px;" >'+
+    	            '<div align="right"><a title="'+j+'" data-original-title="" href="#" class="btn btn-primary btn-xs" onclick="editTask(this.title)"><i class="fa fa-edit" > Edit</i></a></div>'+
+                   '<p><span class="label label-default">Task Name</span> : '+test[j].task_name+'</p>'+
+                    '<p><span class="label label-info">Description</span> : '+test[j].Desc+'</p>'+
+                    '<p><span class="label label-primary">Assignee</span> : '+test[j].Assignee+'</p>'+
+                    '<p><span class="label label-default">Priority</span> : '+test[j].Priority+'</p>'+
+                  '</div>';
+    	       
+    	             $("#doneSet").append(data);
+    	              $("#"+j).data("test",test[j]);
+    	   
+    	         }
+    	          else if(test[j].Status=="Requested")
+    	         {
+    	          var passdata=JSON.stringify(test[j]);
+    	          
+    	            var data='<div id="'+j+'" style="background-color:hsla(60,100%,50%,0.5); border:1px solid #ccc; border-radius:4px; padding:3px; margin:2px;" >'+
+    	            '<div align="right"><a title="'+j+'" data-original-title="" href="#" class="btn btn-primary btn-xs" onclick="editTask(this.title)"><i class="fa fa-edit" > Edit</i></a></div>'+
+                   '<p><span class="label label-default">Task Name</span> : '+test[j].task_name+'</p>'+
+                    '<p><span class="label label-info">Description</span> : '+test[j].Desc+'</p>'+
+                    '<p><span class="label label-primary">Assignee</span> : '+test[j].Assignee+'</p>'+
+                    '<p><span class="label label-default">Priority</span> : '+test[j].Priority+'</p>'+
+                  '</div>';
+    	       
+    	             $("#requestedSet").append(data);
+    	             $("#"+j).data("test",test[j]);
+    	         }
+    	      }
+           
+    	    }
     	     
-    	     console.log(test[0].project_name);
-    	     var data='<div class="col-lg-4">'+
-                	'<div class="box">'+
-                  	'<header>'+
-                    	'<h5>'+test[0].project_name+'</h5>'+
-                    	'<div class="toolbar">'+
-                    	'<button id='+test[0].project_name+' class="btn btn-xs btn-success" onclick="viewstatus(this.id);">Status</button>'+
-                      '<button id='+test[0].project_name+' class="btn btn-xs btn-primary" onclick="viewproject(this.id);">View</button>'+
-                    	'</div>'+
-                  	'</header>'+
-              	'</div>'
-		             $("#displayProjects").append(data);  
+    	     
+    	   
     	    }
     	    
     	    },
     	     error: function(response,text,err){
     	    	 alert(err);
     	 	 }
-});
+     });
 });
 
 function newProjectSubmit(){
@@ -68,31 +116,22 @@ data.push(email_id);
            o[this.name] = this.value || '';
        }
    });
-   //return o;
+  
      
-   alert(JSON.stringify(o));
+  
    $.ajax({
     	    type: "POST",
-    	    url: "/createTaskKanban",
+    	    url: "editTask",
     	    dataType: 'json',
     	    data : o,
     	    async: false,
     	    crossDomain : true,
     	    success: function(data){
-    	     var data='<div class="col-lg-4">'+
-                	'<div class="box">'+
-                  	'<header>'+
-                    	'<h5>'+o.project_name+'</h5>'+
-                    	'<div class="toolbar">'+
-                    	'<button id='+o.project_name+' class="btn btn-xs btn-success" onclick="viewstatus(this.id);">Status</button>'+
-                      '<button id='+o.project_name+' class="btn btn-xs btn-primary" onclick="viewproject(this.id);">View</button>'+
-                    	'</div>'+
-                  	'</header>'+
-              	'</div>'
-		$("#displayProjects").append(data);
+    	    
 		
 $("#closemodel").click();
-			       console.log("User added successfully");
+			       console.log("Update successfully");
+			       location.reload();
     	    },
     	     error: function(response,text,err){
     	    	 alert(err);
@@ -109,4 +148,25 @@ function viewproject(id){
 	function viewstatus(id){
 	console.log("you clicked on status of project="+id);
 	
+	}
+	function navigateToDashboard()
+	{
+	 var windowUrl = window.location.href;
+	 var query = windowUrl.split("?");
+	 window.open("/dashboardKanban.html?" + query[1], "_self");
+	 
+	}
+	function editTask(data){
+	console.log("called");
+	 var getthus=$("#"+data).data("test");
+	 $("#project_name").val(getthus.project_name);
+	 $("#task_name").val(getthus.task_name);
+	 $("#dp1").val(getthus.start_date);
+	 $("#dp2").val(getthus.end_date);
+	 $("#Desc").val(getthus.Desc);
+	 $("#Task_Type").val(getthus.Task_Type);
+	 $("#Assignee").val(getthus.Assignee);
+	 $("#Status").val(getthus.Status);
+	 $("#Priority").val(getthus.Priority);
+	 $("#dataModalButton").click();
 	}
