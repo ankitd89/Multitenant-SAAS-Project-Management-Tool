@@ -8,7 +8,7 @@ $( document ).ready(function() {
      };
      
     //alert(JSON.stringify(email_id)); 
-     $.ajax({
+    $.ajax({
     	    type: "POST",
     	    url: "/getScrumProjects",
     	    dataType: 'json',
@@ -17,7 +17,7 @@ $( document ).ready(function() {
     	    crossDomain : true,
     	    success: function(o){
     	    var stringjson=JSON.stringify(o);
-    	   // console.log("JSON-"+stringjson);
+    	    console.log("JSON-"+stringjson);
     	    for(var i=0;i<o.length;i++)
     	    {
     	     var test=o[i].projects;
@@ -81,7 +81,7 @@ data.push(email_id);
     	    success: function(data){
     	    
 		
-$("#closemodel").click();
+    $("#closemodel").click();
 			       console.log("User added successfully");
 			       location.reload();
     	    },

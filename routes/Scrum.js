@@ -19,7 +19,7 @@ this.getProjects = function(req, res, next) {
 	    user_id=result[0].user_id;
 	    tenant_id = result[0].tenant_id;
 	    
-	    db.dmlQry('select distinct(project_name) from Data_table where user_id = ?',user_id, function(error,result){
+	    db.dmlQry('select distinct(project_name) from Data_Table where user_id = ?',user_id, function(error,result){
 		    if(error){
 		        console.log("Error" + error);
 		        res.writeHead(500, {'Content-Type': "application/json"});
@@ -33,12 +33,12 @@ this.getProjects = function(req, res, next) {
 		    
 		    for(var j=0;j<projects.length;j++)
 	    	{
-		    	//var Gantter_query = "select task_id, task_name, start_date, end_date, r.record_id,extension_name, GROUP_CONCAT(if(r.extension_id = 7005, value, NULL)) AS 'Desc', GROUP_CONCAT(if(r.extension_id = 7006, value, NULL)) AS 'Task_Type', GROUP_CONCAT(if(r.extension_id = 7007, value, NULL)) AS 'Assignee', GROUP_CONCAT(if(r.extension_id = 7008, value, NULL)) AS 'Status', GROUP_CONCAT(if(r.extension_id = 7009, value, NULL)) AS 'Priority' from Data_table d join record r ON d.record_id = r.record_id join Meta_data md ON md.extension_id = r.extension_id where project_name = ? group by task_id";
+		    	//var Gantter_query = "select task_id, task_name, start_date, end_date, r.record_id,extension_name, GROUP_CONCAT(if(r.extension_id = 7005, value, NULL)) AS 'Desc', GROUP_CONCAT(if(r.extension_id = 7006, value, NULL)) AS 'Task_Type', GROUP_CONCAT(if(r.extension_id = 7007, value, NULL)) AS 'Assignee', GROUP_CONCAT(if(r.extension_id = 7008, value, NULL)) AS 'Status', GROUP_CONCAT(if(r.extension_id = 7009, value, NULL)) AS 'Priority' from Data_Table d join record r ON d.record_id = r.record_id join Meta_Data md ON md.extension_id = r.extension_id where project_name = ? group by task_id";
 		    	k=0;
 		    	project=projects[j];
 		    	console.log("project + "+project);
 		    	var count =0;
-		    	db.dmlQry('select project_name,task_id, task_name, start_date, end_date, GROUP_CONCAT(if(r.extension_id = 7010, value, NULL)) AS "Team_velocity", GROUP_CONCAT(if(r.extension_id = 7011, value, NULL)) AS "Actual_points", GROUP_CONCAT(if(r.extension_id = 7012, value, NULL)) AS "Points_Expected", GROUP_CONCAT(if(r.extension_id = 7013, value, NULL)) AS "Point_Completed" from Data_table d join record r ON d.record_id = r.record_id join Meta_data md ON md.extension_id = r.extension_id where project_name = ? group by task_id',project, function(error,result){
+		    	db.dmlQry('select project_name,task_id, task_name, start_date, end_date, GROUP_CONCAT(if(r.extension_id = 7010, value, NULL)) AS "Team_velocity", GROUP_CONCAT(if(r.extension_id = 7011, value, NULL)) AS "Actual_points", GROUP_CONCAT(if(r.extension_id = 7012, value, NULL)) AS "Points_Expected", GROUP_CONCAT(if(r.extension_id = 7013, value, NULL)) AS "Point_Completed" from Data_Table d join record r ON d.record_id = r.record_id join Meta_Data md ON md.extension_id = r.extension_id where project_name = ? group by task_id',project, function(error,result){
 		 		    count++;
 		    		if(error){
 		 		        console.log("Error" + error);
@@ -51,7 +51,7 @@ this.getProjects = function(req, res, next) {
 			 		    
 			 		    console.log(result);   
 			 		    var tempProjects = {};
-			 		    tempProjects[result[0].project_name]=  result; 
+			 		    tempProjects["projects"]=  result; 
 			 		    resUJson.push(tempProjects);
 			 		    if(count==projects.length){
 			 			    console.log("Final Output Json");
