@@ -659,8 +659,123 @@ this.createTask = function(req, res, next) {
         
     });*/
     console.log("Request"+ req.body);
-
-
-
  }
+  
+  
+  
+  
+  this.getQueue = function(req, res) {
+	  var resUJson=[];
+	  var email_id= req.body.email_id;
+	   var user_id;
+	   var tenant_id;
+	   var record_id;
+	   var Requested_JSON={};
+	   var Done_JSON={};
+	   var InProgress_JSON={};
+	   console.log(email_id);
+	   //console.log("++Json Received=="+req.body);
+	  db.dmlQry('select user_id, tenant_id from Users where email_id = ?',email_id, function(error,result){
+	    if(error){
+	        console.log("Error" + error);
+	        res.writeHead(500, {'Content-Type': "application/json"});
+	        res.end(JSON.stringify({response:error}));
+	    }
+	    
+	    
+	    user_id=result[0].user_id;
+	    tenant_id = result[0].tenant_id;
+	    console.log("QUERY")
+	    
+	    //1
+	    db.dmlQry('select task_name from data_table d JOIN record r ON d.record_id=r.record_id where extension_id=7008 and value="Done" AND user_id= ? and project_name = ?',[user_id,req.body.project_name], function(error,result){
+	    	if(error){
+		        console.log("Error" + error);
+		        res.writeHead(500, {'Content-Type': "application/json"});
+		        res.end(JSON.stringify({response:error}));
+		    }
+	    	if(result.length!=0){
+	    		var result_array = [];
+		    	 var tempProjects = {};
+		    	 for(var i=0; i<result.length;i++){
+		    		 result_array.push(result[i].task_name);
+		    	 }
+		    	 
+		    	 console.log("result array tasks +     "+result_array);
+		    	 
+		 		    tempProjects["Done"]=  result_array;
+		 		    resUJson.push(tempProjects);
+		 		    console.log(JSON.stringify(resUJson))
+		 		   console.log(" Done  :" +resUJson);
+	    	}
+	    	
+	    	
+	 
+	    db.dmlQry('select task_name from data_table d JOIN record r ON d.record_id=r.record_id where extension_id=7008 and value="In Progress" AND user_id= ? and project_name = ?',[user_id,req.body.project_name], function(error,result){
+	    	if(error){
+		        console.log("Error" + error);
+		        res.writeHead(500, {'Content-Type': "application/json"});
+		        res.end(JSON.stringify({response:error}));
+		    }
+	    	
+	    	if(result.length!=0){
+	    		var result_array = [];
+		    	 var tempProjects = {};
+		    	 for(var i=0; i<result.length;i++){
+		    		 result_array.push(result[i].task_name);
+		    	 }
+		    	 
+		    	 console.log("result array tasks +     "+result_array);
+		    	 
+		 		    tempProjects["In Progress"]=  result_array;
+		 		    resUJson.push(tempProjects);
+		 		    console.log(JSON.stringify(resUJson))
+		 		   console.log(" In Progress  :" +resUJson);
+	    	}
+	    
+	    
+	    //3
+	    db.dmlQry('select task_name from data_table d JOIN record r ON d.record_id=r.record_id where extension_id=7008 and value="Requested" AND user_id= ? and project_name = ?',[user_id,req.body.project_name], function(error,result){
+	    	if(error){
+		        console.log("Error" + error);
+		        res.writeHead(500, {'Content-Type': "application/json"});
+		        res.end(JSON.stringify({response:error}));
+		    }
+	    	if(result.length!=0){
+	    		var result_array = [];
+		    	 var tempProjects = {};
+		    	 for(var i=0; i<result.length;i++){
+		    		 result_array.push(result[i].task_name);
+		    	 }
+		    	 
+		    	 console.log("result array tasks +     "+result_array);
+		    	 
+		 		    tempProjects["Requested"]=  result_array;
+		 		    resUJson.push(tempProjects);
+		 		    console.log(JSON.stringify(resUJson))
+		 		   console.log(" Requested  :" +resUJson);
+	    	}
+	    	
+	    	if(resUJson.length==0){
+	    		res.end("No Values Found");
+	    	}
+	    	else
+	    		{
+	    		res.end(JSON.stringify(resUJson));
+	    		}
+	    	
+	    	
+	    });//3
+	    
+	    });//2
+	    
+	    });//1
+	   
+	    
+	    
+	  });
+	  
+	  
+  }
+  
     
