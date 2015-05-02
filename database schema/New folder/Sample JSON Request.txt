@@ -52,3 +52,10 @@
     "Point_Completed": 150
     
 }
+
+
+//get project queue JSON
+{
+"email_id":"nishant@gmail.com",
+    "project_name":"abc"
+}
