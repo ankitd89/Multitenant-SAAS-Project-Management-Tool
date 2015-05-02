@@ -33,6 +33,21 @@
     <link rel="stylesheet" href="assets/lib/timepicker/css/bootstrap-timepicker.min.css">
     <link rel="stylesheet" href="assets/lib/switch/css/bootstrap3/bootstrap-switch.min.css">
     <link rel="stylesheet" href="assets/lib/jasny-bootstrap/css/jasny-bootstrap.min.css">
+    <script src="assets/js/app.min.js"></script>
+    <script src="assets/js/style-switcher.min.js"></script>
+    <script type="text/javascript">
+ 
+    $( document ).ready(function() {
+		//$("#menu").removeClass("affix");
+		 Metis.formGeneral();
+  
+      var less = {
+        env: "development",
+        relativeUrls: false,
+        rootpath: "../assets/"
+      };
+    });
+    </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -146,7 +161,7 @@
           <li class="nav-header">Menu</li>
           <li class="nav-divider"></li>
           <li class="">
-            <a href="dashboardGantter.html">
+            <a onclick = "navigateToDashboard()">
               <i class="fa fa-dashboard"></i><span class="link-title">&nbsp;Dashboard</span> 
             </a> 
           </li>
@@ -323,7 +338,7 @@
         </div><!-- /.BODY -->
         
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id="closemodel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
         
       </div>
