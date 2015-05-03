@@ -1,7 +1,19 @@
 // getTasks 
 [
     {
-        "abc": [
+        "projects": [
+            {
+                "project_name": "Abc",
+                "task_id": 41607,
+                "task_name": "1",
+                "start_date": "2015-04-28T07:00:00.000Z",
+                "end_date": "2015-04-28T07:00:00.000Z",
+                "Desc": null,
+                "Task_Type": "opel",
+                "Assignee": "Ankit",
+                "Status": "sad",
+                "Priority": "None"
+            },
             {
                 "project_name": "abc",
                 "task_id": 72645,
@@ -11,8 +23,20 @@
                 "Desc": "test",
                 "Task_Type": "Bug",
                 "Assignee": "Nishant",
-                "Status": "Done",
+                "Status": "In Progress",
                 "Priority": "High"
+            },
+            {
+                "project_name": "Abc",
+                "task_id": 78842,
+                "task_name": "1",
+                "start_date": "2015-04-28T07:00:00.000Z",
+                "end_date": "2015-04-28T07:00:00.000Z",
+                "Desc": null,
+                "Task_Type": null,
+                "Assignee": null,
+                "Status": null,
+                "Priority": "None"
             },
             {
                 "project_name": "abc",
@@ -20,16 +44,16 @@
                 "task_name": "abc",
                 "start_date": "2015-05-05T07:00:00.000Z",
                 "end_date": "2015-05-10T07:00:00.000Z",
-                "Desc": "test",
-                "Task_Type": "Bug",
-                "Assignee": "Nishant",
+                "Desc": "test_updated2",
+                "Task_Type": "Bug2",
+                "Assignee": "Nishant2",
                 "Status": "Done",
-                "Priority": "High"
+                "Priority": "High2"
             }
         ]
     },
     {
-        "P1": [
+        "projects": [
             {
                 "project_name": "P1",
                 "task_id": 18210,
@@ -64,33 +88,7 @@ Gantter Response
 
 [
     {
-        "G1": [
-            {
-                "project_name": "G1",
-                "task_id": 26832,
-                "task_name": "G1.2",
-                "start_date": "2015-05-05T07:00:00.000Z",
-                "end_date": "2015-05-10T07:00:00.000Z",
-                "Duration": "40",
-                "Cost": "200",
-                "Risk": "Security Risks",
-                "Resource": "Nupoor"
-            },
-            {
-                "project_name": "G1",
-                "task_id": 53324,
-                "task_name": "G1.1",
-                "start_date": "2015-05-05T07:00:00.000Z",
-                "end_date": "2015-05-10T07:00:00.000Z",
-                "Duration": "40",
-                "Cost": "200",
-                "Risk": "Security Risks",
-                "Resource": "Nupoor"
-            }
-        ]
-    },
-    {
-        "G2": [
+        "projects": [
             {
                 "project_name": "G2",
                 "task_id": 38882,
@@ -100,7 +98,8 @@ Gantter Response
                 "Duration": "40",
                 "Cost": null,
                 "Risk": "Security Risks",
-                "Resource": "Nupoor"
+                "Resource": "Nupoor",
+                "Percent_Complete": null
             },
             {
                 "project_name": "G2",
@@ -111,28 +110,121 @@ Gantter Response
                 "Duration": "40",
                 "Cost": "200",
                 "Risk": "Security Risks",
-                "Resource": "Nupoor"
+                "Resource": "Nupoor",
+                "Percent_Complete": null
+            }
+        ]
+    },
+    {
+        "projects": [
+            {
+                "project_name": "G1",
+                "task_id": 24696,
+                "task_name": "GT2",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Duration": "40",
+                "Cost": "200",
+                "Risk": "Security Risks",
+                "Resource": "Nupoor",
+                "Percent_Complete": "70"
+            },
+            {
+                "project_name": "G1",
+                "task_id": 26832,
+                "task_name": "G1.2",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Duration": "40",
+                "Cost": "200",
+                "Risk": "Security Risks",
+                "Resource": "Nupoor",
+                "Percent_Complete": null
+            },
+            {
+                "project_name": "G1",
+                "task_id": 53324,
+                "task_name": "G1.1",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Duration": "40",
+                "Cost": "200",
+                "Risk": "Security Risks",
+                "Resource": "Nupoor",
+                "Percent_Complete": null
+            },
+            {
+                "project_name": "G1",
+                "task_id": 87377,
+                "task_name": "GT1",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Duration": "40",
+                "Cost": "200",
+                "Risk": "Security Risks",
+                "Resource": "Nupoor",
+                "Percent_Complete": "30"
+            }
+        ]
+    },
+    {
+        "projects": [
+            {
+                "project_name": "ProGantter",
+                "task_id": 71034,
+                "task_name": "GT2",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Duration": "40",
+                "Cost": "200",
+                "Risk": "Security Risks",
+                "Resource": "Nupoor",
+                "Percent_Complete": "45"
+            },
+            {
+                "project_name": "ProGantter",
+                "task_id": 94182,
+                "task_name": "GT2",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Duration": "40",
+                "Cost": "200",
+                "Risk": "Security Risks",
+                "Resource": "Nupoor",
+                "Percent_Complete": "45"
+            },
+            {
+                "project_name": "ProGantter",
+                "task_id": 97342,
+                "task_name": "PG1",
+                "start_date": "2015-05-05T07:00:00.000Z",
+                "end_date": "2015-05-10T07:00:00.000Z",
+                "Duration": "40",
+                "Cost": "200",
+                "Risk": "Security Risks",
+                "Resource": "Nupoor",
+                "Percent_Complete": "30"
             }
         ]
     }
 ]
 
 
-// Actual JSON output for get projects API
+// Actual JSON output for get projects API Scrum
 
 [
     {
-        "S1": [
+        "projects": [
             {
                 "project_name": "S1",
                 "task_id": 18695,
                 "task_name": "S1.1",
                 "start_date": "2015-05-05T07:00:00.000Z",
                 "end_date": "2015-05-10T07:00:00.000Z",
-                "Team_velocity": "40",
-                "Actual_points": "200",
-                "Points_Expected": "200",
-                "Point_Completed": "150"
+                "Team_velocity": "42",
+                "Actual_points": "202",
+                "Points_Expected": "202",
+                "Point_Completed": "152"
             },
             {
                 "project_name": "S1",
@@ -148,7 +240,7 @@ Gantter Response
         ]
     },
     {
-        "S2": [
+        "projects": [
             {
                 "project_name": "S2",
                 "task_id": 11705,
@@ -174,3 +266,13 @@ Gantter Response
         ]
     }
 ]
+
+//Get status for Kanban
+[{"Done":["abc"]},{"In_Progress":["xyz"]}]
+
+// Get Scrum Project Status
+{"Expected_Completion_Date":"2015-5-3"}
+
+// Get Gantter Status
+{"Percent_Complete":40}
+

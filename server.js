@@ -119,7 +119,8 @@ var SampleApp = function() {
          self.app.post('/createGantterTask', Gantter.createTask);
          self.app.post('/editGantterTask', Gantter.editTask);
          self.app.post('/getQueue', KanbanAPIs.getQueue);
-
+         self.app.post('/getScrumStatus', Scrum.getStatus);
+         self.app.post('/getGantterStatus', Gantter.getStatus);
         
          self.app.post('/adduser',  function(req,res){
              

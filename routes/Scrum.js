@@ -581,4 +581,157 @@ this.createTask = function(req, res, next) {
 
 
  }
+
+
+
+ this.getStatus = function(req, res) {
+      var No_of_Hours = 0;
+      var records = [];
+      var resUJson=[];
+      var email_id= req.body.email_id;
+       var user_id;
+       var tenant_id;
+       var record_id;
+       var Requested_JSON={};
+       var Done_JSON={};
+       var InProgress_JSON={};
+       var total_points_sum=0;
+       var total_points_completed_sum=0;
+       var count =0;
+       var team_velocity_sum = 0;
+       console.log(email_id);
+       //console.log("++Json Received=="+req.body);
+      db.dmlQry('select user_id, tenant_id from Users where email_id = ?',email_id, function(error,result){
+        if(error){
+            console.log("Error" + error);
+            res.writeHead(500, {'Content-Type': "application/json"});
+            res.end(JSON.stringify({response:error}));
+        }
+        
+        
+        user_id=result[0].user_id;
+        tenant_id = result[0].tenant_id;
+        console.log("QUERY")
+        
+        db.dmlQry('select record_id from data_table where user_id = ? and project_name = ?',[user_id, req.body.project_name], function(error,result){
+        if(error){
+            console.log("Error" + error);
+            res.writeHead(500, {'Content-Type': "application/json"});
+            res.end(JSON.stringify({response:error}));
+        }
+        for(var j=0;j<result.length;j++){
+            records[j]=result[j].record_id;
+            console.log(records[j]);
+        }
+        
+    
+        //1
+        
+        for(var j=0;j<records.length;j++){
+            count++;
+            db.dmlQry('select value from record r JOIN data_table d ON d.record_id=r.record_id where extension_id=7012 and r.record_id = ?',[records[j]], function(error,result){
+                if(error){
+                    console.log("Error" + error);
+                    res.writeHead(500, {'Content-Type': "application/json"});
+                    res.end(JSON.stringify({response:error}));
+                }
+                if(result.length==0){
+                    res.end("No Data in DB");
+                }
+                else{
+                    //console.log(result);
+                    total_points_sum = total_points_sum+parseInt(result[0].value);
+                    console.log(total_points_sum);
+                    
+                }
+                if(count==records.length)
+                {
+                    
+                console.log("total_points_sum in console after for "+total_points_sum);
+                
+                }
+            });
+            
+        }
+        count =0;
+        for(var j=0;j<records.length;j++){
+            count++;
+            db.dmlQry('select value from record r JOIN data_table d ON d.record_id=r.record_id where extension_id=7013 and r.record_id = ?',[records[j]], function(error,result){
+                if(error){
+                    console.log("Error" + error);
+                    res.writeHead(500, {'Content-Type': "application/json"});
+                    res.end(JSON.stringify({response:error}));
+                }
+                if(result.length==0){
+                    res.end("No Data in DB");
+                }
+                else{
+                    //console.log(result);
+                    total_points_completed_sum = total_points_completed_sum+parseInt(result[0].value);
+                    console.log(total_points_completed_sum);
+                    
+                }
+                if(count==records.length)
+                {
+                    
+                console.log("total_points_sum in console after for "+total_points_completed_sum);
+                
+                }
+            });
+            
+        }
+        count =0;
+        console.log("records.length"+records.length);
+        for(var j=0;j<records.length;j++){
+            console.log("count  "+count);
+            console.log("j  "+j);
+            
+            db.dmlQry('select value from record r JOIN data_table d ON d.record_id=r.record_id where extension_id=7010 and r.record_id = ?',[records[j]], function(error,result){
+                if(error){
+                    console.log("Error" + error);
+                    res.writeHead(500, {'Content-Type': "application/json"});
+                    res.end(JSON.stringify({response:error}));
+                }
+                if(result.length==0){
+                    res.end("No Data in DB");
+                }
+                else{
+                    //console.log(result);
+                    team_velocity_sum = team_velocity_sum+parseInt(result[0].value);
+                    console.log(team_velocity_sum);
+                    
+                }
+                count++;
+                if(count==records.length)
+                {
+                    var someDate = new Date();
+                    No_of_Hours = ((total_points_sum-total_points_completed_sum)/(team_velocity_sum/count));
+                    var numberOfDaysToAdd = Math.ceil((No_of_Hours/24));
+                    someDate.setDate(someDate.getDate() + numberOfDaysToAdd); 
+                    
+                    var dd = someDate.getDate();
+                    var mm = someDate.getMonth() + 1;
+                    var y = someDate.getFullYear();
+
+                    var someFormattedDate = y + '-'+ mm + '-'+ dd;
+                    var date_JSON = {"Expected_Completion_Date" : someFormattedDate}
+                    res.end(JSON.stringify(date_JSON));
+                }
+                
+                
+                
+                
+            });
+            
+        }
+        
+        
+      });
+      
+      
+
+      });
+     
+      
+  }
     

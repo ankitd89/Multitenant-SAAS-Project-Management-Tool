@@ -728,7 +728,7 @@ this.createTask = function(req, res, next) {
 		    	 
 		    	 console.log("result array tasks +     "+result_array);
 		    	 
-		 		    tempProjects["In Progress"]=  result_array;
+		 		    tempProjects["In_Progress"]=  result_array;
 		 		    resUJson.push(tempProjects);
 		 		    console.log(JSON.stringify(resUJson))
 		 		   console.log(" In Progress  :" +resUJson);
