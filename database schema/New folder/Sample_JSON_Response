@@ -268,7 +268,26 @@ Gantter Response
 ]
 
 //Get status for Kanban
-[{"Done":["abc"]},{"In_Progress":["xyz"]}]
+[
+  {
+    "status": "Done",
+    "task_name": [
+      "Java"
+    ]
+  },
+  {
+    "status": "In Progress",
+    "task_name": [
+      "Shellscripting"
+    ]
+  },
+  {
+    "status": "Requested",
+    "task_name": [
+      "Json making"
+    ]
+  }
+]
 
 // Get Scrum Project Status
 {"Expected_Completion_Date":"2015-5-3"}

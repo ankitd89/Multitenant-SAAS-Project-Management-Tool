@@ -703,8 +703,8 @@ this.createTask = function(req, res, next) {
 		    	 }
 		    	 
 		    	 console.log("result array tasks +     "+result_array);
-		    	 
-		 		    tempProjects["Done"]=  result_array;
+		    	 	tempProjects["status"] = "Done"
+		 		    tempProjects["task_name"]=  result_array;
 		 		    resUJson.push(tempProjects);
 		 		    console.log(JSON.stringify(resUJson))
 		 		   console.log(" Done  :" +resUJson);
@@ -727,8 +727,9 @@ this.createTask = function(req, res, next) {
 		    	 }
 		    	 
 		    	 console.log("result array tasks +     "+result_array);
-		    	 
-		 		    tempProjects["In_Progress"]=  result_array;
+		    	 	tempProjects["status"] = "In Progress"
+		 		    tempProjects["task_name"]=  result_array;
+		 		   
 		 		    resUJson.push(tempProjects);
 		 		    console.log(JSON.stringify(resUJson))
 		 		   console.log(" In Progress  :" +resUJson);
@@ -750,8 +751,9 @@ this.createTask = function(req, res, next) {
 		    	 }
 		    	 
 		    	 console.log("result array tasks +     "+result_array);
-		    	 
-		 		    tempProjects["Requested"]=  result_array;
+		    	 	tempProjects["status"] = "Requested"
+		 		    tempProjects["task_name"]=  result_array;
+		 		   
 		 		    resUJson.push(tempProjects);
 		 		    console.log(JSON.stringify(resUJson))
 		 		   console.log(" Requested  :" +resUJson);

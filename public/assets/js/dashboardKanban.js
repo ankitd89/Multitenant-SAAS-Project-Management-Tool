@@ -23,7 +23,7 @@ $( document ).ready(function() {
     	    {
     	     var test=o[i].projects;
     	     console.log("test print"+JSON.stringify(test));
-    
+    		 var id = "displayStatus_"+test[0].project_name;
     	     console.log(test[0].project_name);
     	     var data='<div class="col-lg-4">'+
                 	'<div class="box">'+
@@ -34,6 +34,14 @@ $( document ).ready(function() {
                       '<button id='+test[0].project_name+' class="btn btn-xs btn-primary" onclick="viewproject(this.id);">View</button>'+
                     	'</div>'+
                   	'</header>'+
+                  	 '<div id='+id + ' class="" style="display:none">'+
+               			'<div id='+"test"+test[0].project_name+' class="col-md-5">'+
+              			'</div>'+
+              			'<div id='+"canvas-holder"+test[0].project_name+' class="col-md-7">'+
+              				'<canvas id='+"chart-area"+test[0].project_name+' width="120" height="100"/>'+
+              			'</div>'+
+              		'</div>'+
+              		'</div>'
               	'</div>'
 		             $("#displayProjects").append(data);  
     	    }
@@ -117,74 +125,35 @@ function viewstatus(id){
 	    async: false,
 	    crossDomain : true,
 	    success: function(data){
-	    	document.getElementById("colorPickerBlock1").innerHTML = "";
-		    var doneArray = data[0].Done;
-		    var inProgressArray = data[1].InProgress;
-		    var requestedArray = data[2].Requested;
-		    if(doneArray.length !=0){
-			    var data1 = '<h4>Done</h4>' + '<ul>';
-			    for(var i=0;i<doneArray.length;i++)
-			    {
-			    	data1 += '<li>' + doneArray[i] + '</li>';
-			    }
-			    data1+='</ul>';
-			    alert(data1);
-			       		
-			    $("#testi").append(data1);
+	    	document.getElementById("displayStatus_" +id).style.display = "block";
+		    console.log(JSON.stringify(data));
+		      var pieData = [];
+		      var color = 1;
+		    for(var j=0;j<data.length;j++)
+		    {
+		    	var status = data[j].status;
+		    	var data1 = '<h4> ' +status+ ' </h4>' + '<ul>';
+		    	var taskArray = data[j].task_name;
+		    	for(var i=0;i<taskArray.length;i++)
+		    	{
+		    			data1 += '<li>' + taskArray[i] + '</li>';
+		    	}
+		    	 data1+='</ul>';
+			    var doneid = document.getElementById("test"+id );
+				$(doneid).append(data1);
+				var b = color*60;
+				pieData.push(	{
+					value: taskArray.length,
+					color:"hsla("+b+",100%,60%,0.75)",
+					highlight: "hsla("+b+",100%,60%,0.5)",
+					label: status
+				});
+				color ++;
 		    }
-		    if(requestedArray.length !=0){
-			    var data1 = '<h4>Requested</h4>' + '<ul>';
-			    for(var i=0;i<requestedArray.length;i++)
-			    {
-			    	data1 += '<li>' + requestedArray[i] + '</li>';
-			    }
-			    data1+='</ul>';
-			    alert(data1);
-			       		
-			    $("#testi").append(data1);
-		    }
-		    var pieData = [
-				{
-					value: 3,
-					color:"hsla(60,100%,50%,0.75)",
-					highlight: "hsla(58,100%,50%,0.5)",
-					label: "Requested"
-				},
-				{
-					value: 2,
-					color: "hsla(210,100%,60%,0.75)",
-					highlight: "hsla(210,100%,60%,0.5)",
-					label: "In Progress"
-				},
-				{
-					value: 1,
-					color: "hsla(90,100%,60%,0.75)",
-					highlight: "hsla(90,100%,60%,0.5)",
-					label: "Done"
-				},
-				
-			];
-
-		
-				var ctx = document.getElementById("chart-area").getContext("2d");
-				window.myPie = new Chart(ctx).Pie(pieData);
-		
-
-
-		   /* if(inProgressArray.length !=0){
-			    var data1 = '<h4>In Progress</h4>' + '<ul>';
-			    for(var i=0;i<inProgressArray.length;i++)
-			    {
-			    	data1 += '<li>' + inProgressArray[i] + '</li>';
-			    }
-			    data1+='</ul>';
-			    alert(data1);
-			       		
-			    $("#colorPickerBlock1").append(data1);
-		    }*/
-		    
-		    
-	
+	   		var chartid = "chart-area"+id;
+			var ctx = document.getElementById(chartid).getContext("2d");
+			window.myPie = new Chart(ctx).Pie(pieData);
+	    
 	    },
 	     error: function(response,text,err){
 	    	 alert(err);
