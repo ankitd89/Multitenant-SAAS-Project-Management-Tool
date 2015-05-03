@@ -51,7 +51,7 @@ this.getProjects = function(req, res, next) {
 			 		    
 			 		    console.log(result);   
 			 		    var tempProjects = {};
-			 		    tempProjects[result[0].project_name]=  result; 
+			 		    tempProjects["projects"]=  result; 
 			 		    resUJson.push(tempProjects);
 			 		    if(count==projects.length){
 			 			    console.log("Final Output Json");
@@ -572,6 +572,7 @@ this.createTask = function(req, res, next) {
          res.writeHead(200, {'Content-Type': "application/json"});
          res.end(JSON.stringify({response:'Saved to MySQL'}));
     }  
+
     return res.render('userProfile',{'firstName':user.firstName,'lastName': user.lastName,'EmailAddress': user._id,'WhatILike': user.whatilike,'Distance':user.Distance});
         
     });*/
@@ -713,7 +714,7 @@ this.createTask = function(req, res, next) {
                     var y = someDate.getFullYear();
 
                     var someFormattedDate = y + '-'+ mm + '-'+ dd;
-                    var date_JSON = {"Expected_Completion_Date" : someFormattedDate}
+                    var date_JSON = {"Expected Completion Date" : someFormattedDate}
                     res.end(JSON.stringify(date_JSON));
                 }
                 
@@ -733,3 +734,4 @@ this.createTask = function(req, res, next) {
      
       
   }
+    

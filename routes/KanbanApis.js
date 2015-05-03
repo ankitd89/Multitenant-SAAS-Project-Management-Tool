@@ -51,7 +51,7 @@ this.getProjects = function(req, res, next) {
 			 		    
 			 		    console.log(result);   
 			 		    var tempProjects = {};
-			 		    tempProjects[result[0].project_name]=  result; 
+			 		    tempProjects["projects"]=  result; 
 			 		    resUJson.push(tempProjects);
 			 		    if(count==projects.length){
 			 			    console.log("Final Output Json");
@@ -728,7 +728,7 @@ this.createTask = function(req, res, next) {
 		    	 
 		    	 console.log("result array tasks +     "+result_array);
 		    	 
-		 		    tempProjects["In_Progress"]=  result_array;
+		 		    tempProjects["In Progress"]=  result_array;
 		 		    resUJson.push(tempProjects);
 		 		    console.log(JSON.stringify(resUJson))
 		 		   console.log(" In Progress  :" +resUJson);
