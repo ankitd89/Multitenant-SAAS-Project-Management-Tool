@@ -38,7 +38,7 @@ this.getProjects = function(req, res, next) {
 		    	project=projects[j];
 		    	console.log("project + "+project);
 		    	var count =0;
-		    	db.dmlQry('select project_name,task_id, task_name, start_date, end_date, GROUP_CONCAT(if(r.extension_id = 7001, value, NULL)) AS "Duration", GROUP_CONCAT(if(r.extension_id = 7002, value, NULL)) AS "Cost", GROUP_CONCAT(if(r.extension_id = 7003, value, NULL)) AS "Risk", GROUP_CONCAT(if(r.extension_id = 7004, value, NULL)) AS "Resource" from Data_Table d join record r ON d.record_id = r.record_id join Meta_Data md ON md.extension_id = r.extension_id where project_name = ? group by task_id',project, function(error,result){
+		    	db.dmlQry('select project_name,task_id, task_name, start_date, end_date, GROUP_CONCAT(if(r.extension_id = 7001, value, NULL)) AS "Duration", GROUP_CONCAT(if(r.extension_id = 7002, value, NULL)) AS "Cost", GROUP_CONCAT(if(r.extension_id = 7003, value, NULL)) AS "Risk", GROUP_CONCAT(if(r.extension_id = 7004, value, NULL)) AS "Resource", GROUP_CONCAT(if(r.extension_id = 7014, value, NULL)) AS "Percent_Complete" from Data_Table d join record r ON d.record_id = r.record_id join Meta_Data md ON md.extension_id = r.extension_id where project_name = ? group by task_id',project, function(error,result){
 		 		    count++;
 		    		if(error){
 		 		        console.log("Error" + error);
@@ -51,7 +51,7 @@ this.getProjects = function(req, res, next) {
 			 		    
 			 		    console.log(result);   
 			 		    var tempProjects = {};
-			 		    tempProjects["projects"]=  result; 
+			 		    tempProjects[result[0].project_name]=  result; 
 			 		    resUJson.push(tempProjects);
 			 		    if(count==projects.length){
 			 			    console.log("Final Output Json");
@@ -71,8 +71,6 @@ this.getProjects = function(req, res, next) {
  }
 
 
-
- 
 //put
 
 this.editTask = function(req, res, next) {
@@ -105,7 +103,6 @@ this.editTask = function(req, res, next) {
 	    	    "task_id":task_id,
 	    	    "task_name":req.body.task_name,
 	    	    "start_date": req.body.start_date,
-	    	    "end_date":req.body.end_date
 	    	    }*/
 	    
 	    db.dmlQry('update Data_Table set task_name= ?, start_date =?, end_date = ? where task_name = ? and project_name =? and user_id',[req.body.task_name,req.body.start_date,req.body.end_date, req.body.task_name,req.body.project_name,user_id], function(error,result){
@@ -349,6 +346,61 @@ this.editTask = function(req, res, next) {
 	    			
 	    			
 				}
+	    		if(key=="Percent_Complete")
+				{
+	    			console.log("Resource log query");
+	    			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
+	    			    if(error){
+	    			        console.log("Error" + error);
+	    			        res.writeHead(500, {'Content-Type': "application/json"});
+	    			        res.end(JSON.stringify({response:error}));
+	    			    }
+	    			percent_extid= result[0].extension_id;
+	    			console.log(percent_extid); 
+	    			if(percent_extid!=-1){
+	    				var percent_JSON = {
+	    						"record_id": record_id,
+	    						"extension_id":percent_extid,
+	    						"value":req.body.Percent_Complete
+	    				}
+	    				console.log(percent_JSON);
+	    				
+	    				db.dmlQry('select * from record where extension_id = ? and record_id = ?',[percent_extid, record_id], function(error, result) {
+	    					
+	    				if(result.length==0)
+	    				{
+	    				
+	    				db.dmlQry('insert into record set ? ', percent_JSON, function(error, result) {
+	    					if(error){
+	    				        console.log("Error" + error);
+	    				        res.writeHead(500, {'Content-Type': "application/json"});
+	    				        res.end(JSON.stringify({response:error}));
+	    				    }
+	    				    
+	    				});
+	    				}
+	    				
+	    				else
+	    				{
+	    				
+	    					db.dmlQry('update record set value =? where extension_id = ? and record_id = ?',[req.body.Percent_Complete, percent_extid,record_id], function(error, result) {
+		    					if(error){
+		    				        console.log("Error" + error);
+		    				        res.writeHead(500, {'Content-Type': "application/json"});
+		    				        res.end(JSON.stringify({response:error}));
+		    				    }
+		    				    
+		    				});
+	    				
+	    				}
+	    					
+	    				});
+	    			}
+	    				
+	    			});
+	    			
+	    			
+				}
 	    		
 	    		
 	    	}
@@ -384,6 +436,7 @@ this.createTask = function(req, res, next) {
     var cost_extid=-1;
     var risk_extid=-1;
     var resource_extid=-1;
+    var percent_extid=-1;
    // var resource_extid=-1;
     var Data_Table_Object={
     	    "tenant_id": tenant_id,
@@ -542,6 +595,40 @@ this.createTask = function(req, res, next) {
     				    
     				});
     			}
+    			
+    			if(key=="Percent_Complete")
+    			{
+        			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
+        			    if(error){
+        			        console.log("Error" + error);
+        			        res.writeHead(500, {'Content-Type': "application/json"});
+        			        res.end(JSON.stringify({response:error}));
+        			    }
+        			percent_extid= result[0].extension_id;
+        			console.log(percent_extid); 
+        			
+        			if(percent_extid!=-1){
+        				var Percent_JSON = {
+        						"record_id": record_id,
+        						"extension_id":percent_extid,
+        						"value":req.body.Percent_Complete
+        				}
+        				console.log(Percent_JSON);
+        				
+        				db.dmlQry('insert into record set ? ', Percent_JSON, function(error, result) {
+        					if(error){
+        				        console.log("Error" + error);
+        				        res.writeHead(500, {'Content-Type': "application/json"});
+        				        res.end(JSON.stringify({response:error}));
+        				    }
+        				    
+        				});
+        			}
+        			});
+        					
+    			
+    			}
+    			
     			});
     			
     			
@@ -575,7 +662,87 @@ this.createTask = function(req, res, next) {
     });*/
     console.log("Request"+ req.body);
 
-
-
  }
+  
+  
+  
+  this.getStatus = function(req, res, next) {
+	  
+
+      var No_of_Hours = 0;
+      var records = [];
+      var resUJson=[];
+      var email_id= req.body.email_id;
+       var user_id;
+       var tenant_id;
+       var record_id;
+       var InProgress_JSON={};
+       var total_points_sum=0;
+       var count =0;
+       console.log(email_id);
+       //console.log("++Json Received=="+req.body);
+      db.dmlQry('select user_id, tenant_id from Users where email_id = ?',email_id, function(error,result){
+        if(error){
+            console.log("Error" + error);
+            res.writeHead(500, {'Content-Type': "application/json"});
+            res.end(JSON.stringify({response:error}));
+        }
+        
+        
+        user_id=result[0].user_id;
+        tenant_id = result[0].tenant_id;
+        console.log("QUERY")
+        
+        db.dmlQry('select record_id from data_table where user_id = ? and project_name = ?',[user_id, req.body.project_name], function(error,result){
+        if(error){
+            console.log("Error" + error);
+            res.writeHead(500, {'Content-Type': "application/json"});
+            res.end(JSON.stringify({response:error}));
+        }
+        for(var j=0;j<result.length;j++){
+            records[j]=result[j].record_id;
+            console.log(records[j]);
+        }
+        
+        for(var j=0;j<records.length;j++){
+            db.dmlQry('select value from record r JOIN data_table d ON d.record_id=r.record_id where extension_id=7014 and r.record_id = ?',[records[j]], function(error,result){
+                if(error){
+                    console.log("Error" + error);
+                    res.writeHead(500, {'Content-Type': "application/json"});
+                    res.end(JSON.stringify({response:error}));
+                }
+                if(result.length==0){
+                    res.end("No Data in DB");
+                }
+                else{
+                    console.log(result.length);
+                    total_points_sum = total_points_sum+parseInt(result[0].value);
+                    console.log(total_points_sum);
+                    
+                }
+                count++;
+                if(count==records.length)
+                {
+                	 var final = total_points_sum/count;
+                     console.log("count  "+count)
+                     console.log("result final"+ final)
+                var final_JSON= {"Percent_Complete" : final};
+                res.end(JSON.stringify(final_JSON));
+                
+                }
+            });
+            
+        }
+        
+      });
+      
+      
+
+      });
+     
+      
+  
+  }
+  
+  
     
