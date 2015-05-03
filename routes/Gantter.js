@@ -346,6 +346,7 @@ this.editTask = function(req, res, next) {
 	    			
 	    			
 				}
+				console.log("Final Key" + key);
 	    		if(key=="Percent_Complete")
 				{
 	    			console.log("Resource log query");
@@ -355,7 +356,7 @@ this.editTask = function(req, res, next) {
 	    			        res.writeHead(500, {'Content-Type': "application/json"});
 	    			        res.end(JSON.stringify({response:error}));
 	    			    }
-	    			percent_extid= result[0].extension_id;
+	    			var percent_extid= result[0].extension_id;
 	    			console.log(percent_extid); 
 	    			if(percent_extid!=-1){
 	    				var percent_JSON = {
@@ -419,7 +420,7 @@ this.createTask = function(req, res, next) {
    var user_id;
    var tenant_id;
    var record_id;
-   console.log(email_id);
+   console.log(req.body);
   db.dmlQry('select user_id, tenant_id from Users where email_id = ?',email_id, function(error,result){
     if(error){
         console.log("Error" + error);
@@ -595,9 +596,10 @@ this.createTask = function(req, res, next) {
     				    
     				});
     			}
-    			
+    			console.log("Final Key " + key);
     			if(key=="Percent_Complete")
     			{
+    				console.log("Percent_Complete log query");
         			db.dmlQry('select extension_id from Meta_Data where extension_name =?',key, function(error,result){
         			    if(error){
         			        console.log("Error" + error);

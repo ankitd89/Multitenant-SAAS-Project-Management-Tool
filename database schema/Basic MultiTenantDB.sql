@@ -60,12 +60,20 @@ create table record (
         references Meta_Data (extension_id),
     value varchar(30)
 );
-INSERT INTO Meta_Data (`tenant_id`, `extension_id`, `extension_name`, `extenstion_data_type`) VALUES ('1', '7001', 'Duration', 'int'),('1', '7002', 'Cost', 'int'),('1', '7003', 'Risk', 'varchar'),('1', '7004', 'Resource', 'varchar'),('2', '7005', 'Desc', 'varchar'),('2', '7006', 'Task_Type', 'varchar'),('2', '7007', 'Assignee', 'varchar'),
-('2', '7008', 'Status', 'varchar'),
-('2', '7009', 'Priority', 'varchar'),
-('3', '7010', 'Team_velocity', 'int'),
-('3', '7011', 'Actual_points', 'int'),
-('3', '7012', 'Points_Expected', 'int'),
-('3', '7013', 'Point_Completed', 'int');
+INSERT INTO Meta_Data (`tenant_id`, `extension_id`, `extension_name`, `extenstion_data_type`) 
+VALUES ('1', '7001', 'Duration', 'int'),
+('1', '7002', 'Cost', 'int'),
+('1', '7003', 'Risk', 'varchar'),
+('1', '7004', 'Resource', 'varchar'),
+('1', '7005', 'Percent_Complete', 'int'),
+('2', '7006', 'Desc', 'varchar'),
+('2', '7007', 'Task_Type', 'varchar'),
+('2', '7008', 'Assignee', 'varchar'),
+('2', '7009', 'Status', 'varchar'),
+('2', '7010', 'Priority', 'varchar'),
+('3', '7011', 'Team_velocity', 'int'),
+('3', '7012', 'Actual_points', 'int'),
+('3', '7013', 'Points_Expected', 'int'),
+('3', '7014', 'Point_Completed', 'int');
 
 

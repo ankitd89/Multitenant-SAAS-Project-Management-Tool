@@ -104,6 +104,30 @@ function viewproject(id){
 	function viewstatus(id){
 	console.log("you clicked on status of project="+id);
 	
+	
+	 var windowUrl = window.location.href;
+	var query = windowUrl.split("?");
+    ///getQueue
+    var reqData = {
+        "email_id" : query[1],
+        "project_name" : id
+    };
+    $.ajax({
+	    type: "POST",
+	    url: "/getScrumStatus",
+	    dataType: 'json',
+	    data : reqData,
+	    async: false,
+	    crossDomain : true,
+	    success: function(data){
+	     alert(JSON.stringify(data));
+	    
+	    },
+	     error: function(response,text,err){
+	    	 alert(err);
+	 	 }
+	   });
+	
 	}
 	
 	function navigateToDashboard()

@@ -613,7 +613,7 @@ this.createTask = function(req, res, next) {
         tenant_id = result[0].tenant_id;
         console.log("QUERY")
         
-        db.dmlQry('select record_id from data_table where user_id = ? and project_name = ?',[user_id, req.body.project_name], function(error,result){
+        db.dmlQry('select record_id from Data_Table where user_id = ? and project_name = ?',[user_id, req.body.project_name], function(error,result){
         if(error){
             console.log("Error" + error);
             res.writeHead(500, {'Content-Type': "application/json"});
@@ -629,7 +629,7 @@ this.createTask = function(req, res, next) {
         
         for(var j=0;j<records.length;j++){
             count++;
-            db.dmlQry('select value from record r JOIN data_table d ON d.record_id=r.record_id where extension_id=7012 and r.record_id = ?',[records[j]], function(error,result){
+            db.dmlQry('select value from record r JOIN Data_Table d ON d.record_id=r.record_id where extension_id=7012 and r.record_id = ?',[records[j]], function(error,result){
                 if(error){
                     console.log("Error" + error);
                     res.writeHead(500, {'Content-Type': "application/json"});
@@ -656,7 +656,7 @@ this.createTask = function(req, res, next) {
         count =0;
         for(var j=0;j<records.length;j++){
             count++;
-            db.dmlQry('select value from record r JOIN data_table d ON d.record_id=r.record_id where extension_id=7013 and r.record_id = ?',[records[j]], function(error,result){
+            db.dmlQry('select value from record r JOIN Data_Table d ON d.record_id=r.record_id where extension_id=7013 and r.record_id = ?',[records[j]], function(error,result){
                 if(error){
                     console.log("Error" + error);
                     res.writeHead(500, {'Content-Type': "application/json"});
@@ -686,7 +686,7 @@ this.createTask = function(req, res, next) {
             console.log("count  "+count);
             console.log("j  "+j);
             
-            db.dmlQry('select value from record r JOIN data_table d ON d.record_id=r.record_id where extension_id=7010 and r.record_id = ?',[records[j]], function(error,result){
+            db.dmlQry('select value from record r JOIN Data_Table d ON d.record_id=r.record_id where extension_id=7010 and r.record_id = ?',[records[j]], function(error,result){
                 if(error){
                     console.log("Error" + error);
                     res.writeHead(500, {'Content-Type': "application/json"});

@@ -47,6 +47,7 @@ $( document ).ready(function() {
                           '<td>'+test[j].Cost+'</td>'+
                           '<td>'+test[j].Risk+'</td>'+
                           '<td>'+test[j].Resource+'</td>'+
+                          '<td>'+test[j].Percent_Complete+'</td>'+
                           '</tr>';
     	            
     	             $("#gantterdataSet").append(data);
@@ -144,6 +145,6 @@ function viewproject(id){
 	 $("#Cost").val(getthus.Cost);
 	 $("#Risk").val(getthus.Risk);
 	 $("#Resource").val(getthus.Resource);
-	 
+	 $("#Percent_Complete").val(getthus.Percent_Complete);
 	 $("#dataModalButton").click();
 	}
