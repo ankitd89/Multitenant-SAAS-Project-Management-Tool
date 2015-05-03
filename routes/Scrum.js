@@ -714,7 +714,7 @@ this.createTask = function(req, res, next) {
                     var y = someDate.getFullYear();
 
                     var someFormattedDate = y + '-'+ mm + '-'+ dd;
-                    var date_JSON = {"Expected Completion Date" : someFormattedDate}
+                    var date_JSON = {"Expected_Completion_Date" : someFormattedDate}
                     res.end(JSON.stringify(date_JSON));
                 }
                 

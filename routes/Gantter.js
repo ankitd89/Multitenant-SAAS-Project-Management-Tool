@@ -51,7 +51,7 @@ this.getProjects = function(req, res, next) {
 			 		    
 			 		    console.log(result);   
 			 		    var tempProjects = {};
-			 		    tempProjects[result[0].project_name]=  result; 
+			 		    tempProjects["projects"]=  result; 
 			 		    resUJson.push(tempProjects);
 			 		    if(count==projects.length){
 			 			    console.log("Final Output Json");
