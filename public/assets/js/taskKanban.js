@@ -32,7 +32,7 @@ $( document ).ready(function() {
     	         {
     	           $("#projectNameSet").append(test[j].project_name);
     	         }
-    	         if(test[j].Status=="InProgress")
+    	         if(test[j].Status=="In Progress")
     	         {
     	           var passdata=(test[j]);
     	            var data='<div id="'+j+'" style="background-color:hsla(210,100%,60%,0.5); border:1px solid #ccc; border-radius:4px; padding:3px; margin:2px;" >'+

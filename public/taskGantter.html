@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Gantter-Dashboard</title>
+    <title>Gantter-Task</title>
 
     <!--IE Compatibility modes-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,21 +33,6 @@
     <link rel="stylesheet" href="assets/lib/timepicker/css/bootstrap-timepicker.min.css">
     <link rel="stylesheet" href="assets/lib/switch/css/bootstrap3/bootstrap-switch.min.css">
     <link rel="stylesheet" href="assets/lib/jasny-bootstrap/css/jasny-bootstrap.min.css">
-    <script src="assets/js/app.min.js"></script>
-    <script src="assets/js/style-switcher.min.js"></script>
-    <script type="text/javascript">
- 
-    $( document ).ready(function() {
-		//$("#menu").removeClass("affix");
-		 Metis.formGeneral();
-  
-      var less = {
-        env: "development",
-        relativeUrls: false,
-        rootpath: "../assets/"
-      };
-    });
-    </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -133,38 +118,23 @@
       </div><!-- /#top -->
       <div id="left">
         <div class="media user-media bg-dark dker">
-          <div class="user-media-toggleHover">
-           <span type="button" class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#myModal"></span>
+          <div class="user-media-toggleHover" style="display:none">
+           <span type="button" id="dataModalButton" class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#myModal"></span>
   
           </div>
-         <!-- <div class="user-wrapper bg-dark">
-            <a class="user-link" href="#">
-              <img class="media-object img-thumbnail user-img" alt="User Picture" src="assets/img/user.gif">
-              <span class="label label-danger user-label">16</span> 
-            </a> 
-            <div class="media-body">
-              <h5 class="media-heading">Archie</h5>
-              <ul class="list-unstyled user-info">
-                <li> <a href="#">Administrator</a>  </li>
-                <li>Last Access :
-                  <br>
-                  <small>
-                    <i class="fa fa-calendar"></i>&nbsp;16 Mar 16:32</small> 
-                </li>
-              </ul>
-            </div>
-          </div>-->
+        
         </div>
 
         <!-- #menu -->
-        <ul id="menu" class="bg-blue dker">
+         <ul id="menu" class="bg-blue dker">
           <li class="nav-header">Menu</li>
           <li class="nav-divider"></li>
           <li class="">
-            <a onclick = "navigateToDashboard()">
-              <i class="fa fa-dashboard"></i><span class="link-title">&nbsp;Dashboard</span> 
-            </a> 
+            <a onclick="navigateToDashboard()">
+              <i class="fa fa-dashboard"></i><span class="link-title">&nbsp;Dashboard</span>
+            </a>
           </li>
+         
           
           
           <li class="nav-divider"></li>
@@ -175,10 +145,41 @@
       <div id="content">
         <div class="outer">
           <div class="inner bg-light lter">
-            <h2>Gantter Dashboard</h2>
+            <h2 id="projectNameSet">Project Name: </h2>
 	<!-- add dynamic project below-->
             <div id="displayProjects" class="row">
-           
+           <div class="col-lg-12">
+                <div class="box">
+                  <header>
+                    <h5>Gantter</h5>
+                    
+                  </header>
+                  <div id="stripedTable" class="body collapse in">
+                    <table class="table table-striped table-hover responsive-table">
+                      <thead>
+                        <tr>
+                          <th><i class="fa fa-edit" ></i></th>
+                          <th>Project Name</th>
+                          <th>Task Name</th>
+                          <th>Start Date</th>
+                          <th>End Date</th>
+                          <th>Duration</th>
+                          <th>Cost</th>
+                          <th>Risk</th>
+                          <th>Resource</th>
+                        </tr>
+                      </thead>
+                      <tbody id="gantterdataSet">
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                
+                
+                
+                </div>
+                
+              </div>
            
               
             </div>
@@ -201,7 +202,7 @@
           <h4 class="modal-title">Modal Header</h4>
         </div>
         
-        <div class="body" id="colorPickerBlock">
+          <div class="body" id="colorPickerBlock">
             <form  id="newProject" class="form-horizontal" action="JavaScript:newProjectSubmit();">
               <div class="form-group">
                 <label for="cp1" class="control-label col-lg-4">Project Name</label>
@@ -236,7 +237,7 @@
                <div class="form-group">
                 <label for="autosize" class="control-label col-lg-4">Duration</label>
                 <div class="col-lg-4">
-                <input type="text" name="Duration" id="Duration" placeholder="Enter Project Duration" class="form-control">
+                  <input type="text" name="Duration" id="Duration" placeholder="Enter Project Duration" class="form-control">
                 </div>
               </div>
               <div class="form-group">
@@ -263,9 +264,9 @@
             </form>
             
         </div><!-- /.BODY -->
-        
+      
         <div class="modal-footer">
-          <button id="closemodel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
         
       </div>
@@ -304,7 +305,7 @@
     <!-- Metis demo scripts -->
     <script src="assets/js/app.min.js"></script>
     <!--<script src="assets/js/style-switcher.min.js"></script>-->
-    <script src="assets/js/dashboardGantter.js"></script>
+    <script src="assets/js/taskGantter.js"></script>
   </body>
 
 </html>

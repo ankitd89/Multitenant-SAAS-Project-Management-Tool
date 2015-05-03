@@ -98,11 +98,11 @@ function viewproject(id){
 	var windowUrl = window.location.href;
 	var query = windowUrl.split("?");
 	    
-	//window.open("/taskKanban.html?" + query[1] + "?" + id, "_self");
+	window.open("/taskEasyBacklog.html?" + query[1] + "?" + id, "_self");
 	
 	}
 	function viewstatus(id){
-	  console.log("you clicked on status of project="+id);
+	console.log("you clicked on status of project="+id);
 	
 	}
 	

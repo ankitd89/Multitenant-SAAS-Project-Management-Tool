@@ -89,9 +89,7 @@ data.push(email_id);
     	    	 alert(err);
     	 	 }
     	   });
-     
-       
-       
+    
 	}
 function viewproject(id){
 	console.log("you clicked on view of  project="+id);
@@ -119,13 +117,81 @@ function viewstatus(id){
 	    async: false,
 	    crossDomain : true,
 	    success: function(data){
-	        alert(data);
-	        console.log(JSON.stringify(data));
+	    	document.getElementById("colorPickerBlock1").innerHTML = "";
+		    var doneArray = data[0].Done;
+		    var inProgressArray = data[1].InProgress;
+		    var requestedArray = data[2].Requested;
+		    if(doneArray.length !=0){
+			    var data1 = '<h4>Done</h4>' + '<ul>';
+			    for(var i=0;i<doneArray.length;i++)
+			    {
+			    	data1 += '<li>' + doneArray[i] + '</li>';
+			    }
+			    data1+='</ul>';
+			    alert(data1);
+			       		
+			    $("#testi").append(data1);
+		    }
+		    if(requestedArray.length !=0){
+			    var data1 = '<h4>Requested</h4>' + '<ul>';
+			    for(var i=0;i<requestedArray.length;i++)
+			    {
+			    	data1 += '<li>' + requestedArray[i] + '</li>';
+			    }
+			    data1+='</ul>';
+			    alert(data1);
+			       		
+			    $("#testi").append(data1);
+		    }
+		    var pieData = [
+				{
+					value: 3,
+					color:"hsla(60,100%,50%,0.75)",
+					highlight: "hsla(58,100%,50%,0.5)",
+					label: "Requested"
+				},
+				{
+					value: 2,
+					color: "hsla(210,100%,60%,0.75)",
+					highlight: "hsla(210,100%,60%,0.5)",
+					label: "In Progress"
+				},
+				{
+					value: 1,
+					color: "hsla(90,100%,60%,0.75)",
+					highlight: "hsla(90,100%,60%,0.5)",
+					label: "Done"
+				},
+				
+			];
+
+		
+				var ctx = document.getElementById("chart-area").getContext("2d");
+				window.myPie = new Chart(ctx).Pie(pieData);
+		
+
+
+		   /* if(inProgressArray.length !=0){
+			    var data1 = '<h4>In Progress</h4>' + '<ul>';
+			    for(var i=0;i<inProgressArray.length;i++)
+			    {
+			    	data1 += '<li>' + inProgressArray[i] + '</li>';
+			    }
+			    data1+='</ul>';
+			    alert(data1);
+			       		
+			    $("#colorPickerBlock1").append(data1);
+		    }*/
+		    
+		    
+	
 	    },
 	     error: function(response,text,err){
 	    	 alert(err);
 	 	 }
 	   });
+	   
+	   //$("#hiddenDiv").click();
 	}
 	
 	function navigateToDashboard()

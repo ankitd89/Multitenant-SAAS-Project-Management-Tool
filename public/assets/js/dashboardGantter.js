@@ -8,7 +8,7 @@ $( document ).ready(function() {
      };
      
     //alert(JSON.stringify(email_id)); 
-     $.ajax({
+   $.ajax({
     	    type: "POST",
     	    url: "/getGantterProjects",
     	    dataType: 'json',
@@ -75,20 +75,9 @@ data.push(email_id);
     	    async: false,
     	    crossDomain : true,
     	    success: function(data){
-    	     var data='<div class="col-lg-4">'+
-                	'<div class="box">'+
-                  	'<header>'+
-                    	'<h5>'+o.project_name+'</h5>'+
-                    	'<div class="toolbar">'+
-                    	'<button id='+o.project_name+' class="btn btn-xs btn-success" onclick="viewstatus(this.id);">Status</button>'+
-                      '<button id='+o.project_name+' class="btn btn-xs btn-primary" onclick="viewproject(this.id);">View</button>'+
-                    	'</div>'+
-                  	'</header>'+
-              	'</div>'
-		        $("#displayProjects").append(data);
-		
         $("#closemodel").click();
 			       console.log("User added successfully");
+    	   location.reload();
     	    },
     	     error: function(response,text,err){
     	    	 alert(err);
@@ -103,7 +92,7 @@ function viewproject(id){
 	var windowUrl = window.location.href;
 	var query = windowUrl.split("?");
 	    
-	//window.open("/taskKanban.html?" + query[1] + "?" + id, "_self");
+	window.open("/taskGantter.html?" + query[1] + "?" + id, "_self");
 	
 	}
 	function viewstatus(id){
