@@ -118,7 +118,7 @@ Gantter Response
 ]
 
 
-// Actual JSON output for get projects API for SCRUM
+// Actual JSON output for get projects API
 
 [
     {
@@ -174,14 +174,3 @@ Gantter Response
         ]
     }
 ]
-
-// Get Queue Status for Kanban
-[{"Done":["abc"]},{"In Progress":["xyz"]}]
-
-
-// Get Status for Scrum
-{"Expected Completion Date":"2015-5-3"}
-
-// Get Status for Gantter
-{"Percent_Complete":40}
-
