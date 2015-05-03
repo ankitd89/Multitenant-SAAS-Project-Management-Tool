@@ -665,8 +665,9 @@ this.createTask = function(req, res, next) {
   
   
   this.getQueue = function(req, res) {
-	  var resUJson=[];
-	  var email_id= req.body.email_id;
+	   var resUJson=[];
+	   var email_id= req.body.email_id;
+	   console.log(email_id);
 	   var user_id;
 	   var tenant_id;
 	   var record_id;
@@ -675,7 +676,7 @@ this.createTask = function(req, res, next) {
 	   var InProgress_JSON={};
 	   console.log(email_id);
 	   //console.log("++Json Received=="+req.body);
-	  db.dmlQry('select user_id, tenant_id from Users where email_id = ?',email_id, function(error,result){
+   	   db.dmlQry('select user_id, tenant_id from Users where email_id = ?',email_id, function(error,result){
 	    if(error){
 	        console.log("Error" + error);
 	        res.writeHead(500, {'Content-Type': "application/json"});
@@ -688,7 +689,7 @@ this.createTask = function(req, res, next) {
 	    console.log("QUERY")
 	    
 	    //1
-	    db.dmlQry('select task_name from data_table d JOIN record r ON d.record_id=r.record_id where extension_id=7008 and value="Done" AND user_id= ? and project_name = ?',[user_id,req.body.project_name], function(error,result){
+	    db.dmlQry('select task_name from Data_Table d JOIN record r ON d.record_id=r.record_id where extension_id=7008 and value="Done" AND user_id= ? and project_name = ?',[user_id,req.body.project_name], function(error,result){
 	    	if(error){
 		        console.log("Error" + error);
 		        res.writeHead(500, {'Content-Type': "application/json"});
@@ -711,7 +712,7 @@ this.createTask = function(req, res, next) {
 	    	
 	    	
 	 
-	    db.dmlQry('select task_name from data_table d JOIN record r ON d.record_id=r.record_id where extension_id=7008 and value="In Progress" AND user_id= ? and project_name = ?',[user_id,req.body.project_name], function(error,result){
+	    db.dmlQry('select task_name from Data_Table d JOIN record r ON d.record_id=r.record_id where extension_id=7008 and value="In Progress" AND user_id= ? and project_name = ?',[user_id,req.body.project_name], function(error,result){
 	    	if(error){
 		        console.log("Error" + error);
 		        res.writeHead(500, {'Content-Type': "application/json"});
@@ -735,7 +736,7 @@ this.createTask = function(req, res, next) {
 	    
 	    
 	    //3
-	    db.dmlQry('select task_name from data_table d JOIN record r ON d.record_id=r.record_id where extension_id=7008 and value="Requested" AND user_id= ? and project_name = ?',[user_id,req.body.project_name], function(error,result){
+	    db.dmlQry('select task_name from Data_Table d JOIN record r ON d.record_id=r.record_id where extension_id=7008 and value="Requested" AND user_id= ? and project_name = ?',[user_id,req.body.project_name], function(error,result){
 	    	if(error){
 		        console.log("Error" + error);
 		        res.writeHead(500, {'Content-Type': "application/json"});

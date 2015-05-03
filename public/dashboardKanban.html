@@ -37,25 +37,50 @@
     <link rel="stylesheet" href="assets/lib/timepicker/css/bootstrap-timepicker.min.css">
     <link rel="stylesheet" href="assets/lib/switch/css/bootstrap3/bootstrap-switch.min.css">
     <link rel="stylesheet" href="assets/lib/jasny-bootstrap/css/jasny-bootstrap.min.css">
+    <!--<link rel="stylesheet" href="assets/css/gif.css">-->
     <script src="assets/js/app.min.js"></script>
     <script src="assets/js/style-switcher.min.js"></script>
-    <script type="text/javascript">
- 
-    $( document ).ready(function() {
-		//$("#menu").removeClass("affix");
-		 Metis.formGeneral();
-  
-      var less = {
-        env: "development",
-        relativeUrls: false,
-        rootpath: "../assets/"
-      };
-    });
-    </script>
     <link rel="stylesheet" href="assets/css/style-switcher.css">
     <link rel="stylesheet/less" type="text/css" href="assets/css/less/theme.html">
     <script src="assets/lib/less/less-1.7.5.min.js"></script>
-
+<style type="text/css">
+      <style>
+    #divLoading
+{
+  display:none;
+}
+#divLoading.show
+{
+    display : block;
+    position : fixed;
+    z-index: 100;
+    background-image : url('assets/img/cube.svg');
+   
+   /* opacity : 0.4;*/
+    background-repeat : no-repeat;
+    background-position : center;
+    left : 0;
+    bottom : 0;
+    right : 0;
+    top : 0;
+}
+#loadinggif.show
+{
+    left : 50%;
+    top : 50%;
+    position : absolute;
+    z-index : 101;
+    width : 32px;
+    height : 32px;
+    margin-left : -16px;
+    margin-top : -16px;
+}
+div.content {
+   width : 1000px;
+   height : 1000px;
+}
+    </style>
+</style>
     <!--Modernizr 2.8.2-->
     <script src="assets/lib/modernizr/modernizr.min.js"></script>
   </head>
@@ -196,6 +221,8 @@
       <div id="content">
         <div class="outer">
           <div class="inner bg-light lter">
+             <div id="divLoading" > 
+    </div>
             <h2>Kanban Dashboard</h2>
 	<!-- add dynamic project below-->
             <div id="displayProjects" class="row">

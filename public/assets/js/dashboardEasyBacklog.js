@@ -102,7 +102,7 @@ function viewproject(id){
 	
 	}
 	function viewstatus(id){
-	console.log("you clicked on status of project="+id);
+	  console.log("you clicked on status of project="+id);
 	
 	}
 	

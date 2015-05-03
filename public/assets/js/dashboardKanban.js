@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    
+     $("#divLoading").addClass('show');
      Metis.formGeneral();
      var windowUrl = window.location.href;
 	    var query = windowUrl.split("?");
@@ -8,6 +8,7 @@ $( document ).ready(function() {
      };
      
     //alert(JSON.stringify(email_id)); 
+    
     $.ajax({
     	    type: "POST",
     	    url: "/getProjects",
@@ -22,7 +23,7 @@ $( document ).ready(function() {
     	    {
     	     var test=o[i].projects;
     	     console.log("test print"+JSON.stringify(test));
-    	     
+    
     	     console.log(test[0].project_name);
     	     var data='<div class="col-lg-4">'+
                 	'<div class="box">'+
@@ -36,6 +37,7 @@ $( document ).ready(function() {
               	'</div>'
 		             $("#displayProjects").append(data);  
     	    }
+    	    setTimeout( "$('#divLoading').removeClass('show');",3000 );
     	    
     	    },
     	     error: function(response,text,err){
@@ -79,7 +81,7 @@ data.push(email_id);
     	    success: function(data){
     	    
 		
-$("#closemodel").click();
+            $("#closemodel").click();
 			       console.log("User task successfully");
 			       location.reload();
     	    },
@@ -99,15 +101,36 @@ function viewproject(id){
 	window.open("/taskKanban.html?" + query[1] + "?" + id, "_self");
 	
 	}
-	function viewstatus(id){
-	console.log("you clicked on status of project="+id);
 	
+function viewstatus(id){
+    console.log("you clicked on status of project="+id);
+    var windowUrl = window.location.href;
+	var query = windowUrl.split("?");
+    ///getQueue
+    var reqData = {
+        "email_id" : query[1],
+        "project_name" : id
+    };
+    $.ajax({
+	    type: "POST",
+	    url: "/getQueue",
+	    dataType: 'json',
+	    data : reqData,
+	    async: false,
+	    crossDomain : true,
+	    success: function(data){
+	        alert(data);
+	        console.log(JSON.stringify(data));
+	    },
+	     error: function(response,text,err){
+	    	 alert(err);
+	 	 }
+	   });
 	}
 	
 	function navigateToDashboard()
 	{
-	 var windowUrl = window.location.href;
-	 var query = windowUrl.split("?");
-	 window.open("/dashboardKanban.html?" + query[1], "_self");
-	 
+	    var windowUrl = window.location.href;
+	    var query = windowUrl.split("?");
+	    window.open("/dashboardKanban.html?" + query[1], "_self");
 	}
