@@ -59,3 +59,18 @@
 "email_id":"nishant@gmail.com",
     "project_name":"abc"
 }
+
+
+// Get Status for Scrum
+
+{
+    "email_id":"deep@yahoo.com",
+    "project_name":"S1"
+     
+}
+//Get Status for Gantter
+{
+    "email_id":"nupoor@yahoo.com",
+    "project_name":"ProGantter"    
+}
+
