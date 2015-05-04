@@ -156,19 +156,21 @@ var SampleApp = function() {
         	        res.end(JSON.stringify({response:error}));
         	    }
                else{
-            	   	var user_id=result[0].user_id;
-           	    	var tenant_id = result[0].tenant_id;
-           	    	var password = result[0].password;
-           	    	if(req.body.password == password){
-           	    		//send success message
-           	    		var replyJson = {
-           	    				user_id : user_id,
-           	    				email_id : email_id,
-           	    				tenant_id : tenant_id,
-           	    				password : password
-           	    		};
-           	    		res.writeHead(200, {'Content-Type': "application/json"});
-                        res.end(JSON.stringify(replyJson));
+                   if(result.length != 0){
+                	   	var user_id=result[0].user_id;
+               	    	var tenant_id = result[0].tenant_id;
+               	    	var password = result[0].password;
+               	    	if(req.body.password == password){
+               	    		//send success message
+               	    		var replyJson = {
+               	    				user_id : user_id,
+               	    				email_id : email_id,
+               	    				tenant_id : tenant_id,
+               	    				password : password
+               	    		};
+               	    		res.writeHead(200, {'Content-Type': "application/json"});
+                            res.end(JSON.stringify(replyJson));
+               	    	}
            	    	}
            	    	else{
            	    		//send error
@@ -178,13 +180,6 @@ var SampleApp = function() {
                }          
              });
            });
-
-        
-        
-        
-        
-        
-        
         
     };
 

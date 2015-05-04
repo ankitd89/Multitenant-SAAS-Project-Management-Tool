@@ -22,7 +22,7 @@ $( document ).ready(function() {
     	    {
     	     var test=o[i].projects;
     	     console.log("test print"+JSON.stringify(test));
-    	     
+    	     var divId = "container";
     	     console.log(test[0].project_name);
     	     var data='<div class="col-lg-4">'+
                 	'<div class="box">'+
@@ -33,7 +33,7 @@ $( document ).ready(function() {
                       '<button id='+test[0].project_name+' class="btn btn-xs btn-primary" onclick="viewproject(this.id);">View</button>'+
                     	'</div>'+
                   	'</header>'+
-                  	'<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>'+
+                  	'<div id=' + divId + test[0].project_name + ' style="min-width: 310px; height: 400px;  margin: 0 auto; display:none "></div>'+
               	'</div>'
 		             $("#displayProjects").append(data);  
     	    }
@@ -100,11 +100,7 @@ function viewproject(id){
 	window.open("/taskEasyBacklog.html?" + query[1] + "?" + id, "_self");
 	
 	}
-	function viewstatus(id){
-	    
-	    
-	    
-	    
+	function viewstatus(id){   
 	console.log("you clicked on status of project="+id);
 	 var windowUrl = window.location.href;
 	var query = windowUrl.split("?");
@@ -113,8 +109,6 @@ function viewproject(id){
         "email_id" : query[1],
         "project_name" : id
     };
-    
-    
     $.ajax({
 	    type: "POST",
 	    url: "/getScrumStatus",
@@ -165,7 +159,9 @@ function viewproject(id){
 	    	console.log(dateArray);
 	    	console.log(finalintCompletedArray);
 	    	console.log(intpointExpectedArray);
-	    	$('#container').highcharts({
+			$('#container'+id).css("display","block");
+			$("#progress"+id).css("display","block");
+	    	$('#container'+id).highcharts({
         chart: {
             type: 'line'
         },
