@@ -207,6 +207,6 @@ function viewproject(id){
 	{
 	 var windowUrl = window.location.href;
 	 var query = windowUrl.split("?");
-	 window.open("/dashboardKanban.html?" + query[1], "_self");
+	 window.open("/dashboardEasyBacklog.html?" + query[1], "_self");
 	 
 	}
