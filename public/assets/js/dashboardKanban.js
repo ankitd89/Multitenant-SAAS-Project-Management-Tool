@@ -45,7 +45,7 @@ $( document ).ready(function() {
               	'</div>'
 		             $("#displayProjects").append(data);  
     	    }
-    	    setTimeout( "$('#divLoading').removeClass('show');",3000 );
+    	    setTimeout( "$('#divLoading').removeClass('show');",1000 );
     	    
     	    },
     	     error: function(response,text,err){

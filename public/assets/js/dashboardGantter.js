@@ -32,6 +32,13 @@ $( document ).ready(function() {
                       '<button id='+test[0].project_name+' class="btn btn-xs btn-primary" onclick="viewproject(this.id);">View</button>'+
                     	'</div>'+
                   	'</header>'+
+                  		'<div id=progress'+test[0].project_name + ' class="body" style="display:none" >'+
+								'<div class="progress progress-striped active ">'+
+                      				'<div id=progressBarSet'+test[0].project_name+' class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%;">'+
+                        			'<span id=progressBarSetHover'+test[0].project_name+' class=""></span>'+
+                        			'</div>'+
+                    			 '</div>'+
+						'</div>'+
               	'</div>'
 		         $("#displayProjects").append(data);  
     	    }
@@ -46,14 +53,14 @@ $( document ).ready(function() {
 
 function newProjectSubmit(){
  var data=$("#newProject").serializeArray();
+ //var data =[];
  var windowUrl = window.location.href;
 	var query = windowUrl.split("?");
 	var email_id ={
 	 name:"email_id",
  value : query[1]
 };
-data.push(email_id);
-
+data.unshift(email_id);
  var o = {};
    $.each(data, function() {
        if (o[this.name] !== undefined) {
@@ -112,7 +119,25 @@ function viewproject(id){
 	    async: false,
 	    crossDomain : true,
 	    success: function(data){
-	    	alert(JSON.stringify(data));
+	    //	alert(JSON.stringify(data));
+	    $("#progress"+id).css("display","block");
+	    if(data.Percent_Complete<=35)
+	    {
+	    $("#progressBarSet"+id).css("width",data.Percent_Complete+"%");
+	    $("#progressBarSet"+id).addClass("progress-bar-warning");
+	    $("#progressBarSetHover"+id).append(data.Percent_Complete+"%");
+	    }
+	    else if(data.Percent_Complete>=75)
+	    {
+	   	$("#progressBarSet"+id).css("width",data.Percent_Complete+"%");
+	   	$("#progressBarSet"+id).addClass("progress-bar-success");
+	    $("#progressBarSetHover"+id).append(data.Percent_Complete+"%");
+	    }
+	    else{
+	    	$("#progressBarSet"+id).css("width",data.Percent_Complete+"%");
+	   	
+	    $("#progressBarSetHover"+id).append(data.Percent_Complete+"%");
+	    }
 	    	console.log(data);
 	    },
 	     error: function(response,text,err){
