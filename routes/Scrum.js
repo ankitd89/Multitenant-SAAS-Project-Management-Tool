@@ -592,13 +592,14 @@ this.createTask = function(req, res, next) {
        var user_id;
        var tenant_id;
        var record_id;
-       var Requested_JSON={};
-       var Done_JSON={};
-       var InProgress_JSON={};
+       var Point_Completed_JSON={};
+       var Points_Expected_JSON={};
+       //var InProgress_JSON={};
        var total_points_sum=0;
        var total_points_completed_sum=0;
        var count =0;
        var team_velocity_sum = 0;
+       var valueEnd_Date = [];
        console.log(email_id);
        //console.log("++Json Received=="+req.body);
       db.dmlQry('select user_id, tenant_id from Users where email_id = ?',email_id, function(error,result){
@@ -613,7 +614,7 @@ this.createTask = function(req, res, next) {
         tenant_id = result[0].tenant_id;
         console.log("QUERY")
         
-        db.dmlQry('select record_id from Data_Table where user_id = ? and project_name = ?',[user_id, req.body.project_name], function(error,result){
+        db.dmlQry('select record_id,end_date from Data_Table where user_id = ? and project_name = ?',[user_id, req.body.project_name], function(error,result){
         if(error){
             console.log("Error" + error);
             res.writeHead(500, {'Content-Type': "application/json"});
@@ -621,12 +622,13 @@ this.createTask = function(req, res, next) {
         }
         for(var j=0;j<result.length;j++){
             records[j]=result[j].record_id;
+            valueEnd_Date.push(result[j].end_date);
             console.log(records[j]);
         }
         
     
         //1
-        
+        var valuePoints_Expected = [];
         for(var j=0;j<records.length;j++){
             count++;
             db.dmlQry('select value from record r JOIN Data_Table d ON d.record_id=r.record_id where extension_id=7012 and r.record_id = ?',[records[j]], function(error,result){
@@ -639,10 +641,11 @@ this.createTask = function(req, res, next) {
                     res.end("No Data in DB");
                 }
                 else{
+                    
                     //console.log(result);
                     total_points_sum = total_points_sum+parseInt(result[0].value);
                     console.log(total_points_sum);
-                    
+                    valuePoints_Expected.push(result[0].value);
                 }
                 if(count==records.length)
                 {
@@ -654,6 +657,7 @@ this.createTask = function(req, res, next) {
             
         }
         count =0;
+        var valuePoints_Completed = [];
         for(var j=0;j<records.length;j++){
             count++;
             db.dmlQry('select value from record r JOIN Data_Table d ON d.record_id=r.record_id where extension_id=7013 and r.record_id = ?',[records[j]], function(error,result){
@@ -669,7 +673,7 @@ this.createTask = function(req, res, next) {
                     //console.log(result);
                     total_points_completed_sum = total_points_completed_sum+parseInt(result[0].value);
                     console.log(total_points_completed_sum);
-                    
+                    valuePoints_Completed.push(result[0].value);
                 }
                 if(count==records.length)
                 {
@@ -715,7 +719,30 @@ this.createTask = function(req, res, next) {
 
                     var someFormattedDate = y + '-'+ mm + '-'+ dd;
                     var date_JSON = {"Expected_Completion_Date" : someFormattedDate}
-                    res.end(JSON.stringify(date_JSON));
+                     var tempJson = {};
+                     tempJson["name"] = "Points_Expected";
+                     tempJson["value"] = valuePoints_Expected;
+                     
+                     var tempJson1 = {};
+                     tempJson1["name"] = "Point_Completed";
+                     tempJson1["value"] = valuePoints_Completed;
+                     
+                     var tempJson2 = {};
+                     tempJson2["name"] = "Expected_Completion_Date";
+                     tempJson2["value"] = someFormattedDate;
+                     
+                     
+                     var tempJson3 = {};
+                     tempJson3["name"] = "end_date";
+                     tempJson3["value"] = valueEnd_Date;
+                     
+                     var res_JSON = [];
+                     res_JSON.push(tempJson);
+                     res_JSON.push(tempJson3);
+                     res_JSON.push(tempJson1);
+                     res_JSON.push(tempJson2);
+                    
+                    res.end(JSON.stringify(res_JSON));
                 }
                 
                 

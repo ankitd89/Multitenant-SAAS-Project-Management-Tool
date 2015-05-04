@@ -71,7 +71,6 @@ data.push(email_id);
    });
    //return o;
      
-   alert(JSON.stringify(o));
    $.ajax({
     	    type: "POST",
     	    url: "/createScrumTask",
@@ -90,7 +89,6 @@ data.push(email_id);
     	    	 alert(err);
     	 	 }
     	   });
-     
        
        
 	}
@@ -116,22 +114,73 @@ function viewproject(id){
         "project_name" : id
     };
     
-    $('#container').highcharts({
+    
+    $.ajax({
+	    type: "POST",
+	    url: "/getScrumStatus",
+	    dataType: 'json',
+	    data : reqData,
+	    async: false,
+	    crossDomain : true,
+	    success: function(data){
+	    
+	    	console.log(data);
+	    	var dateArray =[];
+	    	var pointCompletedArray =[];
+	    	var pointExpectedArray =[];
+	    	var expectedDate ;
+	    	for(var j=0; j<data.length;j++)
+	    	{
+	    	    if(data[j].name == "end_date")
+	    	    dateArray = data[j].value;
+	    	    if(data[j].name == "Point_Completed")
+	    	    pointCompletedArray = data[j].value;
+	    	    if(data[j].name == "Points_Expected")
+	    	    pointExpectedArray = data[j].value;
+	    	    if(data[j].name == "Expected_Completion_Date")
+	    	    expectedDate = data[j].value;
+	    	}
+	        
+	        var splitDateArray = []
+	        for(var i =0 ; i< dateArray.length ; i++)
+	        {
+	            var first;
+	            first = (dateArray[i].split("T"));
+	            splitDateArray.push(first[0]);
+	           
+	        }
+	        
+	        var finalintCompletedArray = [];
+	        for(var l =0 ; l<pointCompletedArray.length; l++)
+	        {
+	            finalintCompletedArray.push(parseInt(pointCompletedArray[l]));
+	        }
+	        
+	    	var intpointExpectedArray = [];
+	    	for(var k =0 ;k <pointExpectedArray.length;k++)
+	    	{
+	    	   intpointExpectedArray.push(parseInt(pointExpectedArray[k]));
+	    	}
+            
+	    	console.log(dateArray);
+	    	console.log(finalintCompletedArray);
+	    	console.log(intpointExpectedArray);
+	    	$('#container').highcharts({
         chart: {
             type: 'line'
         },
         title: {
-            text: 'Monthly Average Temperature'
+            text: 'Burn Down Chart'
         },
         subtitle: {
-            text: 'Source: WorldClimate.com'
+            text: 'Expected Completion Date:' + expectedDate
         },
         xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            categories: splitDateArray
         },
         yAxis: {
             title: {
-                text: 'Temperature (°C)'
+                text: 'Points'
             }
         },
         plotOptions: {
@@ -143,24 +192,14 @@ function viewproject(id){
             }
         },
         series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 100]
+            name: 'Point Completed',
+            data: finalintCompletedArray
         }, {
-            name: 'London',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+            name: 'Point Expected',
+            data: intpointExpectedArray
         }]
     });
 
-    $.ajax({
-	    type: "POST",
-	    url: "/getScrumStatus",
-	    dataType: 'json',
-	    data : reqData,
-	    async: false,
-	    crossDomain : true,
-	    success: function(data){
-	    	alert(JSON.stringify(data));
-	    	console.log(data);
 	    },
 	     error: function(response,text,err){
 	    	 alert(err);

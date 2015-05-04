@@ -73,7 +73,7 @@ data.unshift(email_id);
        }
 });
 
- alert(JSON.stringify(o));
+ //alert(JSON.stringify(o));
    $.ajax({
     	    type: "POST",
     	    url: "/createGantterTask",
