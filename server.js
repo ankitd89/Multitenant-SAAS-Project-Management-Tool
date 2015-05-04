@@ -146,7 +146,6 @@ var SampleApp = function() {
          
          self.app.post('/getuser',  function(req,res){
              var email_id = req.body.email_id;
-             console.log(user);
              db.dmlQry('select * from Users where email_id = ?',email_id, function(error,result){
         	    if(error){
         	        console.log("Error" + error);
