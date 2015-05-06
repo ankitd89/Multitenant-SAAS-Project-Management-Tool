@@ -17,7 +17,8 @@ $( document ).ready(function() {
     	    crossDomain : true,
     	    success: function(o){
     	    var stringjson=JSON.stringify(o);
-    	   // console.log("JSON-"+stringjson);
+    	    console.log("JSON-"+stringjson);
+    	    alert("JSON-"+stringjson);
     	    for(var i=0;i<o.length;i++)
     	    {
     	     var test=o[i].projects;

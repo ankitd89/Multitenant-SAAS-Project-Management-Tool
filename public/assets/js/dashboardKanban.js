@@ -8,6 +8,7 @@ $( document ).ready(function() {
      };
      
     //alert(JSON.stringify(email_id)); 
+    //console.log(o);
     
     $.ajax({
     	    type: "POST",
@@ -18,11 +19,12 @@ $( document ).ready(function() {
     	    crossDomain : true,
     	    success: function(o){
     	    var stringjson=JSON.stringify(o);
-    	   // console.log("JSON-"+stringjson);
+    	    console.log("JSON-"+stringjson);
     	    for(var i=0;i<o.length;i++)
     	    {
     	     var test=o[i].projects;
     	     console.log("test print"+JSON.stringify(test));
+    	     alert("id" + test[0].project_name);
     		 var id = "displayStatus_"+test[0].project_name;
     	     console.log(test[0].project_name);
     	     var data='<div class="col-lg-4">'+
@@ -103,8 +105,9 @@ function viewproject(id){
 	console.log("you clicked on view of  project="+id);
 	var windowUrl = window.location.href;
 	var query = windowUrl.split("?");
-	    
+	    alert(id);
 	window.open("/taskKanban.html?" + query[1] + "?" + id, "_self");
+	
 	
 	}
 	
