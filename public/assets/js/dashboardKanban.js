@@ -24,7 +24,7 @@ $( document ).ready(function() {
     	    {
     	     var test=o[i].projects;
     	     console.log("test print"+JSON.stringify(test));
-    	     alert("id" + test[0].project_name);
+    	    // alert("id" + test[0].project_name);
     		 var id = "displayStatus_"+test[0].project_name;
     	     console.log(test[0].project_name);
     	     var data='<div class="col-lg-4">'+
@@ -105,7 +105,7 @@ function viewproject(id){
 	console.log("you clicked on view of  project="+id);
 	var windowUrl = window.location.href;
 	var query = windowUrl.split("?");
-	    alert(id);
+	  //  alert(id);
 	window.open("/taskKanban.html?" + query[1] + "?" + id, "_self");
 	
 	
