@@ -112,8 +112,14 @@
     	    async: false,
     	    crossDomain : true,
     	    success: function(data){
-			      console.log("User logged in successfully");
-			      window.open(findTenantPage(data), "_self");
+			      if(data.response == "Invalid User")
+			      {
+			        alert("Invalid User");
+			      }
+			      else{
+			        console.log("User logged in successfully");
+			        window.open(findTenantPage(data), "_self");
+			      }
     	    },
     	     error: function(response,text,err){
     	    	 alert(err);

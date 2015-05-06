@@ -109,6 +109,7 @@ function viewproject(id){
 	}
 	
 function viewstatus(id){
+	
     console.log("you clicked on status of project="+id);
     var windowUrl = window.location.href;
 	var query = windowUrl.split("?");
@@ -126,6 +127,10 @@ function viewstatus(id){
 	    crossDomain : true,
 	    success: function(data){
 	    	document.getElementById("displayStatus_" +id).style.display = "block";
+	    	//alert("test"+id+" ul");
+		    //$("test"+id).innerHTML('');
+		    document.getElementById("test"+id).innerHTML = "";
+		    var doneid = document.getElementById("test"+id );
 		    console.log(JSON.stringify(data));
 		      var pieData = [];
 		      var color = 1;
@@ -139,7 +144,7 @@ function viewstatus(id){
 		    			data1 += '<li>' + taskArray[i] + '</li>';
 		    	}
 		    	 data1+='</ul>';
-			    var doneid = document.getElementById("test"+id );
+			    
 				$(doneid).append(data1);
 				var b = color*60;
 				pieData.push(	{
