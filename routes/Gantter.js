@@ -16,6 +16,13 @@ this.getProjects = function(req, res, next) {
 	        res.writeHead(500, {'Content-Type': "application/json"});
 	        res.end(JSON.stringify({response:error}));
 	    }
+	    if(result.length==0)
+	    {
+	    	
+	    	var message= {"Message": "No entries found"};
+	    	res.end(JSON.stringify(message));
+	    }
+	    else{
 	    user_id=result[0].user_id;
 	    tenant_id = result[0].tenant_id;
 	    
@@ -25,6 +32,13 @@ this.getProjects = function(req, res, next) {
 		        res.writeHead(500, {'Content-Type': "application/json"});
 		        res.end(JSON.stringify({response:error}));
 		    }
+		    if(result.length==0)
+		    {
+		    	
+		    	var message= {"Message": "No entries found"};
+		    	res.end(JSON.stringify(message));
+		    }
+		    else{
 		   
 		    for(var j=0;j<result.length;j++){
 		    	projects[j]=result[j].project_name;
@@ -65,8 +79,9 @@ this.getProjects = function(req, res, next) {
 		 		    
 		 		});
 	    	}
+		    }
 		    
-	});
+	});}
 	   });
  }
 
